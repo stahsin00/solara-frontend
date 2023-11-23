@@ -133,6 +133,7 @@ main h2 {
 #os-title {
   font-family: var(--heading-font);
   text-align: center;
+  font-size: 6vh;
 }
 
 #quest-nav {
@@ -229,6 +230,9 @@ a {
 
 .quest-focus h2 {
   color: white;
+  left: 5vh;
+  font-size: 4vh;
+  font-weight: normal;
 }
 
 .quest-list {
@@ -240,10 +244,21 @@ hr {
   border-color: black;
 }
 
+.quest-focus hr {
+  border-color: white;
+}
+
 .quest-description, .quest-sub-tasks {
   width: 99%;
   height: 18vh;
   padding: 10px;
   margin: 10px auto;
   background-color: rgba(169,186,161,0.15);
+}
+
+.difficulty-text {
+  position: absolute;
+  right: 4vh;
+  top: 5vh;
+  color: #7FB672;
 }
