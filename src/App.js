@@ -1,32 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Home from './pages/Home'
+import Quests from './pages/Quests';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <div className="App">
-      <h1 id="login-title">Solara</h1>
-      <input
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button>Login</button>
-      <br />
-      <button>Sign Up</button>
+      <Header />
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} exact/>
+        <Route path='/quests' element={<Quests />} />
+      </Routes>
     </div>
   );
 }

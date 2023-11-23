@@ -1,39 +1,30 @@
 import React, { useState } from 'react';
 
 function Home() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
-    <div className="Home">
-      <header>
-        <h1 id="header-title">Solara</h1>
-      </header>
-      <nav>
-            <button>Quests</button>
-            <button>Characters</button>
-            <button>Items</button>
-            <button>Shop</button>
-            <button>How To Play</button>
-            <button>Documentation</button>
-            <button>Sources</button>
-      </nav>
-      <main>
-        <div className='quest-content'>
-            <h2 id="os-title">SolOS</h2>
-            <div id='quest-nav'>
-                <button>All</button>
-                <button>Today's Goal</button>
-                <button>Recurrent Tasks</button>
-                <button>Tasks</button>
-                <button>Projects</button>
-            </div>
-        </div>
-        <div>
-            <h2>All</h2>
-        </div>
-        <div>
-
-        </div>
-      </main>
+    <div className="login">
+      <h1 id="login-title">Solara</h1>
+      <input
+        type="text"
+        placeholder="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <br />
+      <input
+        type="password"
+        placeholder="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <button>Login</button>
+      <br />
+      <button>Sign Up</button>
     </div>
   );
 }
