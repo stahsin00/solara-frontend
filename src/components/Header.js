@@ -5,6 +5,7 @@ function Header() {
 
   return (
     <header>
+        <img src={require('../white-sun.png')} alt='logo of a sun' />
         <h1 id="header-title"><Link to='/'>Solara</Link></h1>
     </header>
   );

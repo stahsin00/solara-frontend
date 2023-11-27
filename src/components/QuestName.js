@@ -1,12 +1,12 @@
 import React from 'react';
 
-function QuestName() {
+function QuestName(props) {
 
   return (
     <div className="QuestName">
-        <div className='difficulty'></div>
-        <div className='quest-title'>Sleep</div>
-        <input type="checkbox" defaultChecked={false}/>
+        <div className={`${props.difficulty}-difficulty`}></div>
+        <div className='quest-title'>{props.taskName}</div>
+        <input type="checkbox" checked={false} />
     </div>
   );
 }

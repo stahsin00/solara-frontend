@@ -1,12 +1,85 @@
 import React, { useState } from 'react';
+import { useUser } from '../context/UserContext';
 
 function Home() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { setUserId, setIsLoggedIn } = useUser();
+
+  async function Login(e) {
+    e.preventDefault();
+    if (!loading) {
+      if (!username.trim() || !password.trim()) {
+        return;
+      }
+
+      setLoading(true);
+
+      const data = {username: username, password: password};
+
+      const apiUrl = "http://localhost:3500/api/user/login";
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const { userId } = await response.json();
+
+        setUserId(userId);
+        setIsLoggedIn(true);
+
+      } else {
+        // TODO
+      }
+
+      setUsername("");
+      setPassword("");
+    }
+  }
+
+  async function Register(e) {
+    e.preventDefault();
+    if (!loading) {
+      if (!username.trim() || !password.trim()) {
+        return;
+      }
+
+      const data = {username: username, password: password};
+
+      const apiUrl = "http://localhost:3500/api/user/register";
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // TODO
+
+      } else {
+        // TODO
+      }
+
+      setUsername("");
+      setPassword("");
+    }
+  }
 
   return (
     <div className="login">
-      <h1 id="login-title">Solara</h1>
+      <div className='login-logo'>
+        <img src={require('../white-sun.png')} alt='logo of a sun' />
+        <h1 id="login-title">Solara</h1>
+      </div>
       <input
         type="text"
         placeholder="username"
@@ -22,9 +95,9 @@ function Home() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button>Login</button>
+      <button onClick={Login}>Login</button>
       <br />
-      <button>Sign Up</button>
+      <button onClick={Register}>Sign Up</button>
     </div>
   );
 }

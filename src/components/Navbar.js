@@ -5,9 +5,9 @@ const Navbar = () => {
     return (
         <nav>
             <Link to='/quests'><button>Quests</button></Link>
-            <button>Characters</button>
+            <Link to='/characters'><button>Characters</button></Link>
             <button>Items</button>
-            <button>Shop</button>
+            <Link to='/shop'><button>Shop</button></Link>
             <button>How To Play</button>
             <button>Documentation</button>
             <button>Sources</button>
