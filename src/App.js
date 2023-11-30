@@ -8,15 +8,16 @@ import Shop from './pages/Shop';
 import { Route, Routes } from 'react-router-dom';
 import { useUser } from './context/UserContext';
 import Characters from './pages/Characters';
+import World from './pages/World';
 
 
 
 function App() {
-  const { isLoggedIn } = useUser();
+  const { isLoggedIn, currentTask } = useUser();
 
   return (
     <>
-      {!isLoggedIn ? (<Home />) :
+      {!isLoggedIn ? (<Home />) : (currentTask ? (<World />) :
       (<div className="App">
         <Header />
         <Navbar />
@@ -26,7 +27,7 @@ function App() {
           <Route path='/shop' element={<Shop />} />
           <Route path='/characters' element={<Characters />} />
         </Routes>
-      </div>)
+      </div>))
       }
     </>
   );

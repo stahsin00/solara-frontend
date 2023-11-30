@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
 
 function Home() {
-  const [username, setUsername] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { setUserId, setIsLoggedIn } = useUser();
+  const { setUserId, setUsername, setIsLoggedIn } = useUser();
 
   async function Login(e) {
     e.preventDefault();
@@ -32,13 +32,14 @@ function Home() {
         const { userId } = await response.json();
 
         setUserId(userId);
+        setUsername(username);
         setIsLoggedIn(true);
 
       } else {
         // TODO
       }
 
-      setUsername("");
+      setUserName("");
       setPassword("");
     }
   }
@@ -69,7 +70,7 @@ function Home() {
         // TODO
       }
 
-      setUsername("");
+      setUserName("");
       setPassword("");
     }
   }
@@ -84,7 +85,7 @@ function Home() {
         type="text"
         placeholder="username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => setUserName(e.target.value)}
         required
       />
       <br />

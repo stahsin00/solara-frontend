@@ -3,7 +3,6 @@ import ShopNav from '../components/ShopNav';
 import ShopMain from '../components/ShopMain';
 
 function Shop() {
-
   return (
     <main className="shop">
         <ShopNav />

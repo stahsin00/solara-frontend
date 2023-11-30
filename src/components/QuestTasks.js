@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import QuestName from './QuestName';
 import { useUser } from '../context/UserContext';
 
-function QuestTasks() {
-  const { userId } = useUser();
-  const [ tasks, setTasks ] = useState([]);
+function QuestTasks(props) {
+  const { userId, tasks, setTasks, tasksChanged } = useUser();
   const [loading, setLoading] = useState(false);
 
 useEffect( () => {
+  console.log(tasks);
     setLoading(true);
 
     const apiUrl = `http://localhost:3500/api/user/tasks/${userId}`;
@@ -16,10 +16,12 @@ useEffect( () => {
       setLoading(false);
     })
     
-  }, []);
+  }, [userId, setTasks, tasksChanged]);
 
-  const taskList = tasks.map((task) => (
-    <QuestName 
+  const taskList = (!tasks)? <></> : tasks.map((task) => {
+    console.log(task);
+    return <QuestName 
+      task={task}
       key={task._id}
       taskName={task.taskName}
       description={task.description}
@@ -29,8 +31,9 @@ useEffect( () => {
       difficulty={task.difficulty}
       priority={task.priority}
       time={task.time}
+      setSelectedTask={props.setSelectedTask}
     />
-  ));
+});
 
   return (
     <div className="quest-tasks">

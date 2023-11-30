@@ -11,9 +11,8 @@ function QuestNav() {
         <div className='sizing'></div>
         <div className='quest-nav'>
             <button>All</button>
-            <button>Today's Goal</button>
             <button>Recurrent Tasks</button>
-            <button>Tasks</button>
+            <button>Regular Tasks</button>
             <button>Projects</button>
         </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
-function CharacterCard(props) {
-    const { _id, name, description, atk, spe, art, face, price, setSelectedCharacter } = props;
+function UserCharacterCard(props) {
+    const { _id, name, description, atk, spe, art, face, level, setSelectedCharacter } = props;
 
     function handleClick(e) {
       setSelectedCharacter(
@@ -13,7 +13,7 @@ function CharacterCard(props) {
           spe:spe,
           art:art,
           face:face,
-          price:price
+          level:level
         }
       )
   }
@@ -22,9 +22,9 @@ function CharacterCard(props) {
     <div className="character-card" onClick={handleClick}>
         <img src={`http://localhost:3500/${face}`} alt='a character'></img>
         <div>{name}</div>
-        <div><img src={require('../coin.png')} alt='a coin' /> {price}</div>
+        <div>Level {level}</div>
     </div>
   );
 }
 
-export default CharacterCard;
+export default UserCharacterCard;

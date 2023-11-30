@@ -150,7 +150,7 @@ nav button:hover {
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 1);
   width: 80%;
   height: 70vh;
-  position: absolute;
+  position: relative;
   left: 50%;
   top: 7em;
   transform: translateX(-50%);
@@ -197,6 +197,11 @@ main h2 {
   width: 100%;
 }
 
+.characters-navbar {
+  height: 100%;
+  width: 100%;
+}
+
 .quest-nav button {
   background-color: black;
   font: inherit;
@@ -227,7 +232,25 @@ main h2 {
   font-weight: bold;
 }
 
+.characters-nav button {
+  background-color: black;
+  font: inherit;
+  color: inherit;
+  border: none;
+  padding: 10px;
+  margin: 5px auto;
+  width: 80%;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+}
+
 .shop-nav button:hover {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+.characters-nav button:hover {
   background-color: white;
   color: black;
   font-weight: bold;
@@ -258,6 +281,16 @@ main h2 {
 }
 
 .difficult-difficulty {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  width: 2rem;
+  background-color: #D46C6C;
+  margin: 0;
+  padding: 0;
+}
+
+.hard-difficulty {
   height: 100%;
   position: absolute;
   left: 0;
@@ -361,11 +394,32 @@ hr {
   background-color: rgba(169,186,161,0.15);
 }
 
-.difficulty-text {
+.difficulty-text-easy {
   position: absolute;
   right: 4vh;
   top: 5vh;
   color: #7FB672;
+}
+
+.difficulty-text-medium {
+  position: absolute;
+  right: 4vh;
+  top: 5vh;
+  color: #EACC61;
+}
+
+.difficulty-text-difficult {
+  position: absolute;
+  right: 4vh;
+  top: 5vh;
+  color: #D46C6C;
+}
+
+.difficulty-text-hard {
+  position: absolute;
+  right: 4vh;
+  top: 5vh;
+  color: #D46C6C;
 }
 
 .quest-nav-header {
@@ -461,4 +515,254 @@ header img {
 
 #login-title {
   display: inline;
+}
+
+.header-user-info {
+  position: absolute;
+  right: 10px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-funds {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-funds img {
+  width: 2.5vh;
+  height: 2.5vh;
+  image-rendering: pixelated;
+}
+
+#absolute-position-add-quest {
+  position: absolute;
+  top: 1vh;
+  right: 1vh;
+  width: 6vh;
+  height: 6vh;
+}
+
+.world img {
+  width: 30vh;
+  position: absolute;
+  left: 50%;
+  top: 40vh;
+  transform: translateX(-50%);
+}
+
+.world h2 {
+  position: absolute;
+  left: 50%;
+  top: 35vh;
+  transform: translateX(-50%);
+  font-size: 3vh;
+  color: white;
+  font-weight: normal;
+  text-align: center;
+}
+
+.world button {
+  background-color: rgba(222, 222, 217, 0.95);
+  font: inherit;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  width: 8em;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+}
+
+.world button:hover {
+  background-color: black;
+  color: white;
+}
+
+.battle-stop {
+  position: absolute;
+  left: 50%;
+  top: 85vh;
+  transform: translateX(-50%);
+}
+
+.timer {
+  font-size: 10vh;
+  background-color: black;
+  padding: 2vh;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 65vh;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.current-location {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 5px;
+}
+
+.quest-focus button {
+  background-color: rgba(222, 222, 217, 0.95);
+  font: inherit;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  width: 10vh;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+}
+
+#edit-button {
+  position: absolute;
+  bottom: 1vh;
+  left: 1vh;
+}
+
+#delete-button {
+  position: absolute;
+  bottom: 1vh;
+  left: 12vh;
+}
+
+#start-button {
+  background-color: green;
+  font: inherit;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+}
+
+#health-bar {
+  background-color: grey;
+  width: 20vh;
+  height: 2vh;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 42vh;
+  transform: translateX(-50%);
+  z-index: 1;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+}
+
+#health {
+  background-color: red;
+  width: 20%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.character-info-image {
+  background-color: #2E2E2E;
+  border-radius: 10px;
+  position: absolute;
+  right: 2vh;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.character-info-image img {
+  height: 60vh;
+}
+
+.set-timer {
+  background-color: black;
+  border-radius: 10px;
+  height: 30vh;
+  width: 70vh;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.set-timer-buttons {
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+}
+
+.character-card div {
+  text-align: center;
+}
+
+.character-info-details {
+  background-color: black;
+  padding: 10px;
+  width: 75vh;
+  height: 60vh;
+  position: absolute;
+  top: 5vh;
+}
+
+.character-info-details h2 {
+  color: white;
+  font-weight: normal;
+}
+
+.character-info-details hr {
+  border-color: white;
+}
+
+.character-info button {
+  background-color: rgba(222, 222, 217, 0.95);
+  font: inherit;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  width: 10vh;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+}
+
+.character-info button:hover {
+  background-color: darkgray;
+}
+
+.character-info-back {
+  position: absolute;
+  left: 1vh;
+  bottom: 1vh;
+}
+
+.purchase-details {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 1vh;
+  bottom: 1vh;
+}
+
+.character-price {
+  justify-content: center;
+}
+
+.header-user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-user-info div {
+  margin-left: 5vh;
 }

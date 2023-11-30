@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import CharacterCard from './CharacterCard';
-import CharacterInfo from './CharacterInfo';
+import UserCharacterCard from './UserCharacterCard';
+import UserCharacterInfo from './UserCharacterInfo';
 
-function CharacterList(props) {
+function UserCharacterList(props) {
     const { characters, isLoading } = props;
     const [selectedCharacter, setSelectedCharacter] = useState();
 
@@ -17,27 +17,25 @@ function CharacterList(props) {
     }
 
     const characterList = characters.map((character) => (
-        <CharacterCard 
+        <UserCharacterCard 
             key={character._id} 
             _id={character._id} 
             name={character.name} 
-            description={character.description} 
-            atk={character.atk} 
-            def={character.def}
-            hp={character.hp}
+            description={character.description}
+            atk={character.atk}
             spe={character.spe}
             art={character.art}
             face={character.face}
-            price={character.price}
+            level={character.level} 
             setSelectedCharacter={setSelectedCharacter}
         />
     ));
 
     return (
         <div className="character-list">
-            {(selectedCharacter) ? <CharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/> : characterList}
+            {(selectedCharacter) ? <UserCharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/> : characterList}
         </div>
     );
 }
 
-export default CharacterList;
+export default UserCharacterList;
