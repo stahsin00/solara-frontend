@@ -5,6 +5,8 @@ function UserCharacterInfo(props) {
   const { userId, tasksChanged, setTasksChanged } = useUser();
     const { selectedCharacter, setSelectedCharacter } = props;
     const [level, setLevel] = useState(selectedCharacter.level);
+    const [exp, setExp] = useState(selectedCharacter.exp);
+    const [maxExp, setMaxExp] = useState(selectedCharacter.maxExp);
 
     async function handleClick(e) {
         const apiUrl = `http://localhost:3500/api/user/levelcharacter/${userId}/${selectedCharacter._id}`;
@@ -30,8 +32,26 @@ function UserCharacterInfo(props) {
           if (responseNext.ok) {
             const result = await responseNext.json();
             setLevel(result.character.level);
+            setExp(result.character.exp);
+            setMaxExp(result.character.maxExp);
           }
         } else {
+          const result = await response.json();
+          console.log(result);
+        }
+    }
+
+    async function addToTeam(e) {
+        const apiUrl = `http://localhost:3500/api/user/addtoteam/${userId}/${selectedCharacter._id}`;
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
           const result = await response.json();
           console.log(result);
         }
@@ -41,6 +61,7 @@ function UserCharacterInfo(props) {
     <div className="character-info">
         <div className='character-info-details'>
           <h2 className='character-info-name'>{selectedCharacter.name}</h2>
+          <button onClick={addToTeam} className='character-add-to-team'>Add To Team</button>
           <hr />
           <div className='quest-description'>{selectedCharacter.description}</div>
           <div className='stats'>
@@ -49,6 +70,7 @@ function UserCharacterInfo(props) {
           </div>
           <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
           <div className='purchase-details'>
+            <div>Exp: {exp} / {maxExp}</div>
             <div>Level: {level}</div>
             <button onClick={handleClick}  className='character-info-buy'>Level Up</button>
           </div>

@@ -9,8 +9,6 @@ function UserCharacterList(props) {
     if (isLoading) {
         return <div>loading</div>
       }
-
-      console.log(characters);
   
     if (!characters || characters.length === 0) {
         return (<p>No characters.</p>)
@@ -27,6 +25,8 @@ function UserCharacterList(props) {
             art={character.art}
             face={character.face}
             level={character.level} 
+            exp={character.exp}
+            maxExp={character.maxExp}
             setSelectedCharacter={setSelectedCharacter}
         />
     ));

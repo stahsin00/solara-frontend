@@ -14,6 +14,14 @@ export function UserProvider(props) {
     const [tasksChanged, setTasksChanged] = useState(false);
     const [currentTask, setCurrentTask] = useState();
 
+    const logout = () => {
+        setUserId(null);
+        setUsername(null);
+        setIsLoggedIn(false);
+        setTasks([])
+        setCurrentTask(null);
+    }
+
     const value = {
         userId, 
         setUserId,
@@ -26,7 +34,8 @@ export function UserProvider(props) {
         tasksChanged,
         setTasksChanged,
         currentTask,
-        setCurrentTask
+        setCurrentTask,
+        logout
     }
 
     return (<UserContext.Provider value={value}>{props.children}</UserContext.Provider>)

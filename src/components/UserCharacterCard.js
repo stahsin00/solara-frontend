@@ -1,7 +1,7 @@
 import React from 'react';
 
 function UserCharacterCard(props) {
-    const { _id, name, description, atk, spe, art, face, level, setSelectedCharacter } = props;
+    const { _id, name, description, atk, spe, art, face, level, exp, maxExp, setSelectedCharacter } = props;
 
     function handleClick(e) {
       setSelectedCharacter(
@@ -13,7 +13,9 @@ function UserCharacterCard(props) {
           spe:spe,
           art:art,
           face:face,
-          level:level
+          level:level,
+          exp: exp,
+          maxExp: maxExp
         }
       )
   }

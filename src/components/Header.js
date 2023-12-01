@@ -21,7 +21,7 @@ function Header() {
         <img src={require('../white-sun.png')} alt='logo of a sun' />
         <h1 id="header-title"><Link to='/'>Solara</Link></h1>
         <div className='header-user-info'>
-          <div>Exp: {exp}</div>
+          <div className='header-funds'><img src={require('../exp.png')} alt='a book' /> {exp}</div>
           <div className='header-funds'><img src={require('../coin.png')} alt='a coin' /> {balance}</div>
           <div id="header-username">{username}</div>
         </div>

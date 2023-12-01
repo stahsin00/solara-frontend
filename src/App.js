@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home'
 import Quests from './pages/Quests';
 import Shop from './pages/Shop';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import { useUser } from './context/UserContext';
 import Characters from './pages/Characters';
 import World from './pages/World';
@@ -13,7 +13,7 @@ import World from './pages/World';
 
 
 function App() {
-  const { isLoggedIn, currentTask } = useUser();
+  const { isLoggedIn, currentTask, logout } = useUser();
 
   return (
     <>
@@ -21,6 +21,7 @@ function App() {
       (<div className="App">
         <Header />
         <Navbar />
+        <Link to='/quests'><button className='logout-button' onClick={logout}>Logout</button></Link>
         <Routes>
           <Route path='/' element={<Quests />} exact/>
           <Route path='/quests' element={<Quests />} />

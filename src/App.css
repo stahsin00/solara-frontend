@@ -105,6 +105,22 @@ nav button {
   z-index: 1;
 }
 
+.logout-button {
+  background-color: rgba(222, 222, 217, 0.95);
+  font: inherit;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  width: 8em;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+  position: absolute;
+  right: 1vh;
+  top: 4em;
+}
+
 nav button:hover {
   background-color: black;
   color: white;
@@ -544,7 +560,7 @@ header img {
   height: 6vh;
 }
 
-.world img {
+.slime {
   width: 30vh;
   position: absolute;
   left: 50%;
@@ -765,4 +781,46 @@ header img {
 
 .header-user-info div {
   margin-left: 5vh;
+}
+
+.character-add-to-team {
+  background-color: rgba(222, 222, 217, 0.95);
+  font: inherit;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+  z-index: 1;
+  position: absolute;
+  top: 1vh;
+  right: 1vh;
+}
+
+.character-add-to-team:hover {
+  background-color: darkgray;
+}
+
+.set-timer input {
+  background-color: #d9d9d9;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+  width: 75%;
+  font: inherit;
+  color: black;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.set-timer img {
+  width: 2.5vh;
+  vertical-align: middle;
+}
+
+.rewards-earned-so-far {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
