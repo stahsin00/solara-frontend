@@ -6,7 +6,7 @@ function CharacterInfo(props) {
     const { selectedCharacter, setSelectedCharacter } = props;
 
     async function handleClick(e) {
-        const apiUrl = `http://localhost:3500/api/user/addcharacter/${userId}/${selectedCharacter._id}`;
+        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addcharacter/${userId}/${selectedCharacter._id}`;
   
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -39,7 +39,7 @@ function CharacterInfo(props) {
             <button onClick={handleClick}  className='character-info-buy'>Buy</button>
           </div>
         </div>
-        <div className='character-info-image'><img src={`http://localhost:3500/${selectedCharacter.art}`} alt='a character'></img></div>
+        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.art}`} alt='a character'></img></div>
     </div>
   );
 }

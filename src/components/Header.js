@@ -7,19 +7,31 @@ function Header() {
   const [balance, setBalance] = useState(0);
   const [exp, setExp] = useState(0);
 
-  useEffect( () => {
-    const apiUrl = `http://localhost:3500/api/user/userinfo/${userId}`;
-    fetch(apiUrl).then(res => res.json()).then(fetchedUser => {
-      setBalance(fetchedUser.balance);
-      setExp(fetchedUser.exp);
+  const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/userinfo/${userId}`;
+  async function getUserInfo() {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
-  }, [userId, setBalance, tasksChanged]);
+    if (response.ok) {
+      const { user } = await response.json();
+      setBalance(user.balance);
+      setExp(user.exp);
+    } 
+  }
+
+  // get info from server when there has been a change
+  useEffect( () => {
+    getUserInfo();
+  }, [tasksChanged]);
 
   return (
     <header>
         <img src={require('../white-sun.png')} alt='logo of a sun' />
-        <h1 id="header-title"><Link to='/'>Solara</Link></h1>
+        <h1 className="header-title"><Link to='/'>Solara</Link></h1>
         <div className='header-user-info'>
           <div className='header-funds'><img src={require('../exp.png')} alt='a book' /> {exp}</div>
           <div className='header-funds'><img src={require('../coin.png')} alt='a coin' /> {balance}</div>

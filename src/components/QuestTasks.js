@@ -5,43 +5,60 @@ import { useUser } from '../context/UserContext';
 function QuestTasks(props) {
   const { userId, tasks, setTasks, tasksChanged } = useUser();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-useEffect( () => {
-  console.log(tasks);
+  const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/tasks/${userId}`;
+  async function getTasks() {
     setLoading(true);
 
-    const apiUrl = `http://localhost:3500/api/user/tasks/${userId}`;
-    fetch(apiUrl).then(res => res.json()).then(fetchedTasks => {
-      setTasks(fetchedTasks.tasks);
-      setLoading(false);
-    })
-    
-  }, [userId, setTasks, tasksChanged]);
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  const taskList = (!tasks)? <></> : tasks.map((task) => {
-    console.log(task);
-    return <QuestName 
-      task={task}
-      key={task._id}
-      taskName={task.taskName}
-      description={task.description}
-      completed={task.completed}
-      type={task.type}
-      tags={task.tags}
-      difficulty={task.difficulty}
-      priority={task.priority}
-      time={task.time}
-      setSelectedTask={props.setSelectedTask}
-    />
-});
+    if (response.ok) {
+      const { tasks } = await response.json();
+      setTasks(tasks);
+      setError(null);
+    } else {
+      const { message } = await response.json();
+      setError(message);
+    }
+
+    setLoading(false);
+  }
+
+  useEffect( () => {
+    getTasks();
+  }, [tasksChanged]);
+
+  const taskList = (error) ? (<div className='error-message'>{error}</div>) 
+                    : ((!tasks) ? <></> 
+                      : tasks.map((task) => {
+                        return <QuestName 
+                          task={task}
+                          key={task._id}
+                          setSelectedTask={props.setSelectedTask}
+                        />
+}));
 
   return (
     <div className="quest-tasks">
-        <h2>All</h2>
-        <hr />
-        <div className='quest-list'>
-          {loading ? (<div>loading...</div>) : taskList}
+        {(props.selectedTab == "All") ?
+        (<div className='all-quests'>
+          <h2>All</h2>
+          <hr />
+          <div className='quest-list'>
+            {loading ? (<div>loading...</div>) : taskList}
+          </div>
+        </div>)
+        :
+        <div>
+          <h2>Coming soon.</h2>
         </div>
+        }
     </div>
   );
 }

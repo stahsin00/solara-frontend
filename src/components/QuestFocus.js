@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useUser } from '../context/UserContext';
 
 function QuestFocus(props) {
   const { userId, setCurrentTask, tasksChanged, setTasksChanged } = useUser();
+  const [loading, setLoading] = useState();
+  const [error, setError] = useState();
 
   let taskName = "No Task Selected";
   let description = "Please Select a Task.";
@@ -14,9 +16,11 @@ function QuestFocus(props) {
     difficulty = props.selectedTask.difficulty
   }
 
+  // delete task
   async function handleDelete() {
-    if (props.selectedTask) {
-      const apiUrl = `http://localhost:3500/api/user/${userId}/${props.selectedTask._id}`;
+    if (props.selectedTask && !loading) {
+      setLoading(true);
+      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/${userId}/${props.selectedTask._id}`;
 
       const response = await fetch(apiUrl, {
           method: 'DELETE',
@@ -26,20 +30,19 @@ function QuestFocus(props) {
       });
 
       if (response.ok) {
-          // TODO
-          const result = await response.json();
-          console.log(result);
-          props.setSelectedTask(null);
-          setTasksChanged(!tasksChanged);
-
+        setError(null);
+        setLoading(false);
+        props.setSelectedTask(null);
+        setTasksChanged(!tasksChanged);
       } else {
-          // TODO
-          const result = await response.json();
-          console.log(result);
+        const {message} = await response.json();
+        setLoading(false);
+        setError(message);
       }
     }
   }
 
+  // start game world
   function handleClick() {
     if (props.selectedTask) {
       setCurrentTask(props.selectedTask);
@@ -48,18 +51,17 @@ function QuestFocus(props) {
 
   return (
     <div className="quest-focus">
-        <div className='quest-focus-black'>
+        <div className='focus quest-focus-main'>
             <h2>{taskName}</h2>
             <div className={`difficulty-text-${difficulty}`}>{difficulty}</div>
             <hr />
-            <div className='quest-description'>
+            <div className='description'>
                 {description}
             </div>
             {(!props.selectedTask) ? <></> :
             (<div>
-              Rewards:
-              <button id='edit-button'>Edit</button>
-              <button id='delete-button' onClick={handleDelete}>Delete</button>
+              {error ? (<div className='error-message'>{error}</div>) : <></>}
+              <button className='button-type-light delete-button' onClick={handleDelete}>Delete</button>
               <button onClick={handleClick} id='start-button'>Start</button>
             </div>)
             }

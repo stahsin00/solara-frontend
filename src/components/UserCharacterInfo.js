@@ -9,7 +9,7 @@ function UserCharacterInfo(props) {
     const [maxExp, setMaxExp] = useState(selectedCharacter.maxExp);
 
     async function handleClick(e) {
-        const apiUrl = `http://localhost:3500/api/user/levelcharacter/${userId}/${selectedCharacter._id}`;
+        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/levelcharacter/${userId}/${selectedCharacter._id}`;
   
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -20,7 +20,7 @@ function UserCharacterInfo(props) {
   
         if (response.ok) {
           setTasksChanged(!tasksChanged);
-          const apiUrl = `http://localhost:3500/api/user/characterinfo/${userId}/${selectedCharacter._id}`;
+          const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/characterinfo/${userId}/${selectedCharacter._id}`;
   
           const responseNext = await fetch(apiUrl, {
               method: 'GET',
@@ -42,7 +42,7 @@ function UserCharacterInfo(props) {
     }
 
     async function addToTeam(e) {
-        const apiUrl = `http://localhost:3500/api/user/addtoteam/${userId}/${selectedCharacter._id}`;
+        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtoteam/${userId}/${selectedCharacter._id}`;
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -75,7 +75,7 @@ function UserCharacterInfo(props) {
             <button onClick={handleClick}  className='character-info-buy'>Level Up</button>
           </div>
         </div>
-        <div className='character-info-image'><img src={`http://localhost:3500/${selectedCharacter.art}`} alt='a character'></img></div>
+        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.art}`} alt='a character'></img></div>
     </div>
   );
 }

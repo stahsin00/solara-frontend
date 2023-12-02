@@ -20,7 +20,7 @@ function World() {
 
     const fetchGameInfo = async () => {
       try {
-        const apiUrl = `http://localhost:3500/api/user/gameinfo/${userId}`;
+        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/gameinfo/${userId}`;
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {
@@ -47,7 +47,7 @@ function World() {
 
   const startGame = async () => {
     try {
-      const apiUrl = `http://localhost:3500/api/user/startgame/${userId}`;
+      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/startgame/${userId}`;
       const data = {hours: hours, minutes: minutes};
       const response = await fetch(apiUrl, {
           method: 'POST',
@@ -70,7 +70,7 @@ function World() {
 
 const stopGame = async () => {
   try {
-    const apiUrl = `http://localhost:3500/api/user/stopgame/${userId}`;
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/stopgame/${userId}`;
     const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -101,7 +101,7 @@ useEffect(() => {
 }, [userId, isBattling]);
 
   return (
-    <main className="world">
+    <div className="world">
         <div className='current-location'>Current Location: Solara Outskirts</div>
         {(!isBattling) ? 
         (
@@ -129,7 +129,7 @@ useEffect(() => {
             <button onClick={() => {setIsBattling(false)}} className='battle-stop'>Stop</button>
           </div>
         )}
-    </main>
+    </div>
   );
 }
 

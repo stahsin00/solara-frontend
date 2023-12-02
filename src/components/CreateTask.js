@@ -8,15 +8,14 @@ function CreateTask(props) {
     const [tags, setTags] = useState("");               
     const [difficulty, setDifficulty] = useState("");   
     const [priority, setPriority] = useState("");   
+    const [error, setError] = useState();
+    const [success, setSuccess] = useState();
 
-    const { userId, setTasks, tasksChanged, setTasksChanged } = useUser();
+    const { userId, tasksChanged, setTasksChanged } = useUser();
 
     async function handleSubmit(e) {
         e.preventDefault();
-
         const time = 20;
-
-
         const newTask = {
             taskName: name,
             description,
@@ -27,7 +26,7 @@ function CreateTask(props) {
             time
         };
 
-        const apiUrl = `http://localhost:3500/api/user/addtask/${userId}`;
+        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtask/${userId}`;
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -38,12 +37,15 @@ function CreateTask(props) {
         });
 
         if (response.ok) {
-            // TODO
-            const result = await response.json();
+            const {message} = await response.json();
+            setError(null);
+            setSuccess(message);
             setTasksChanged(!tasksChanged);
     
         } else {
-            // TODO
+            const {message} = await response.json();
+            setError(message);
+            setSuccess(null);
         }
 
 
@@ -82,7 +84,7 @@ function CreateTask(props) {
     }
 
     return (
-        <div>
+        <div className="focus create-task">
             <form onSubmit={handleSubmit}>
                 <h2> Add Task </h2>
                 <label htmlFor="new-todo-name">Name:</label>
@@ -93,6 +95,7 @@ function CreateTask(props) {
                     autoComplete="off"
                     value={name}
                     onChange={handleChange}
+                    className="primary-input create-task-name"
                 />
 
                 <label htmlFor="new-todo-description">Description:</label>
@@ -101,8 +104,9 @@ function CreateTask(props) {
                     name="description"
                     value={description}
                     onChange={handleChange}
+                    className="primary-input"
                 />
-
+                <div className="difficulty-input">
                 <label htmlFor="new-todo-type">Type:</label>
                 <select
                     id="new-todo-type"
@@ -112,19 +116,10 @@ function CreateTask(props) {
                 >
                     <option value="Regular">Regular</option>
                     <option value="Recurrent">Recurrent</option>
-                    <option value="improvement">Improvement</option>
                 </select>
-
-                <label htmlFor="new-todo-tags">Tags:</label>
-                <input
-                    type="text"
-                    id="new-todo-tags"
-                    name="tags"
-                    autoComplete="off"
-                    value={tags}
-                    onChange={handleChange}
-                />
-
+                <br></br>
+                </div>
+                <div className="difficulty-input">
                 <label>Difficulty:</label>
                 <label>
                     <input
@@ -156,7 +151,8 @@ function CreateTask(props) {
                     />
                     Hard
                 </label>
-
+                </div>
+                <div className="difficulty-input">
                 <label>Priority:</label>
                 <label>
                     <input
@@ -188,11 +184,12 @@ function CreateTask(props) {
                     />
                     High
                 </label>
-                <button type="submit">
+                </div>
+                <button type="submit" className="button-type-medium add-button">
                 Add
                 </button>
         </form>
-        <button onClick={() => props.setIsAdding(false)}>Cancel</button>
+        <button onClick={() => props.setIsAdding(false)} className="button-type-medium cancel-button">Cancel</button>
       </div>
     );
   }

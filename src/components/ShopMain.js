@@ -10,7 +10,7 @@ function ShopMain() {
     useEffect( () => {
         setAppState({ loading: true });
     
-        const apiUrl = "http://localhost:3500/api/characters/all";
+        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/characters/all`;
         fetch(apiUrl).then(res => res.json()).then(fetchedCharacters => {
           setAppState({ loading: false, characters: fetchedCharacters.characters} );
         })

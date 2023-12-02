@@ -20,7 +20,7 @@ function CharacterCard(props) {
 
   return (
     <div className="character-card" onClick={handleClick}>
-        <img src={`http://localhost:3500/${face}`} alt='a character'></img>
+        <img src={`${process.env.REACT_APP_IMAGE_URL}/${face}`} alt='a character'></img>
         <div>{name}</div>
         <div><img src={require('../coin.png')} alt='a coin' /> {price}</div>
     </div>

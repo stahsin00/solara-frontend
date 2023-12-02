@@ -3,14 +3,19 @@ import { useUser } from '../context/UserContext';
 
 function QuestName(props) {
   const [isChecked, setIsChecked] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const { userId, tasksChanged, setTasksChanged } = useUser();
 
   const handleClick = async (e) => {
     e.stopPropagation();
+
+    if (loading) return;
+    setLoading(true);
+
     setIsChecked(true);
 
-    const apiUrl = `http://localhost:3500/api/user/completetask/${userId}/${props.task._id}`;
+    // complete task
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/completetask/${userId}/${props.task._id}`;
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -20,23 +25,17 @@ function QuestName(props) {
         });
 
         if (response.ok) {
-            // TODO
-            const result = await response.json();
-            console.log(result);
+            setLoading(false)
             setTasksChanged(!tasksChanged);
     
-        } else {
-            // TODO
-            const result = await response.json();
-            console.log(result);
         }
     
   };
 
   return (
     <div className="QuestName" onClick={() => props.setSelectedTask(props.task)}>
-        <div className={`${props.difficulty}-difficulty`}></div>
-        <div className='quest-title'>{props.taskName}</div>
+        <div className={`${props.task.difficulty}-difficulty`}></div>
+        <div className='quest-title'>{props.task.taskName}</div>
         <input type="checkbox" checked={isChecked} onClick={handleClick}/>
     </div>
   );
