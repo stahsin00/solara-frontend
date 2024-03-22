@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
-import CharactersMain from '../components/CharactersMain';
-import MainNav from '../components/MainNav';
+import InventoryMain from '../components/InventoryMain';
+import NavSub from '../components/NavSub';
 
 function Inventory() {
   const [selectedTab, setSelectedTab] = useState();
 
   return (
     <main className="inventory">
-        <MainNav 
+        <NavSub 
           buttons={["Team","Characters", "Equipment"]}
           buttonFunction={setSelectedTab}
         />
-        <CharactersMain />
+        <InventoryMain />
     </main>
   );
 }

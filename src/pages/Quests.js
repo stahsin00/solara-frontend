@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import QuestTasks from '../components/QuestTasks';
+import QuestTaskList from '../components/QuestTaskList';
 import QuestFocus from '../components/QuestFocus';
-import CreateTask from '../components/CreateTask';
-import MainNav from '../components/MainNav';
+import QuestCreateTask from '../components/QuestCreateTask';
+import NavSub from '../components/NavSub';
 
 function Quests() {
   const [selectedTab, setSelectedTab] = useState("All");
@@ -11,12 +11,12 @@ function Quests() {
 
   return (
     <main className="quests">
-        <MainNav 
+        <NavSub 
           buttons={["All","Regular Tasks", "Recurrent Tasks", "Projects"]}
           buttonFunction={setSelectedTab}
         />
-        <QuestTasks setSelectedTask={setSelectedTask} selectedTab={selectedTab}/>
-        {isAdding ? <CreateTask setIsAdding={setIsAdding}/> : <QuestFocus selectedTask={selectedTask} setSelectedTask={setSelectedTask}/>}
+        <QuestTaskList setSelectedTask={setSelectedTask} selectedTab={selectedTab}/>
+        {isAdding ? <QuestCreateTask setIsAdding={setIsAdding}/> : <QuestFocus selectedTask={selectedTask} setSelectedTask={setSelectedTask}/>}
         <div id="absolute-position-add-quest"><button onClick={() => setIsAdding(true)} className="button-type-medium">Add</button></div>
     </main>
   );

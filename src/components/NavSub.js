@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MainNav(props) {
+function NavSub(props) {
 
     const buttonList = props.buttons.map((button) => (
         <button onClick={() => props.buttonFunction(button)} key={button} className='button-type-dark'>{button}</button>
@@ -20,4 +20,4 @@ function MainNav(props) {
   );
 }
 
-export default MainNav;
+export default NavSub;

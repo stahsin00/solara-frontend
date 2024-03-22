@@ -19,7 +19,7 @@ function ShopMain() {
 
   return (
     <div className="shop-main">
-        <CharacterList isLoading={appState.loading} characters={appState.characters}/>
+        <CharacterList shop={true} isLoading={appState.loading} characters={appState.characters}/>
     </div>
   );
 }

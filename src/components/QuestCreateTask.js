@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useUser } from "../context/UserContext";
 
-function CreateTask(props) {
+function QuestCreateTask(props) {
     const [name, setName] = useState("");       
     const [description, setDescription] = useState(""); 
     const [type, setType] = useState("Regular");
@@ -194,4 +194,4 @@ function CreateTask(props) {
     );
   }
   
-  export default CreateTask;
+  export default QuestCreateTask;
