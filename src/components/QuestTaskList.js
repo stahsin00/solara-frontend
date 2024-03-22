@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import QuestName from './QuestName';
+import QuestTask from './QuestTask';
 import { useUser } from '../context/UserContext';
 
-function QuestTasks(props) {
+function QuestTaskList(props) {
   const { userId, tasks, setTasks, tasksChanged } = useUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -37,7 +37,7 @@ function QuestTasks(props) {
   const taskList = (error) ? (<div className='error-message'>{error}</div>) 
                     : ((!tasks) ? <></> 
                       : tasks.map((task) => {
-                        return <QuestName 
+                        return <QuestTask 
                           task={task}
                           key={task._id}
                           setSelectedTask={props.setSelectedTask}
@@ -63,4 +63,4 @@ function QuestTasks(props) {
   );
 }
 
-export default QuestTasks;
+export default QuestTaskList;

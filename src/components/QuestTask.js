@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
 
-function QuestName(props) {
+function QuestTask(props) {
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const { userId, tasksChanged, setTasksChanged } = useUser();
 
   const handleClick = async (e) => {
+    console.log("click");
     e.stopPropagation();
 
     if (loading) return;
@@ -41,4 +42,4 @@ function QuestName(props) {
   );
 }
 
-export default QuestName;
+export default QuestTask;

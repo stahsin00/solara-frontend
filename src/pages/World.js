@@ -19,6 +19,10 @@ function World() {
     }
 
     const fetchGameInfo = async () => {
+      if (!isBattling) {
+        return;
+      }
+
       try {
         const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/gameinfo/${userId}`;
         const response = await fetch(apiUrl, {
@@ -126,7 +130,7 @@ useEffect(() => {
             </div>
             <img src={require('../slime.gif')} alt='animation of a slime being attacked' className='slime'></img>
             <div className='timer'>{formatTime(hours)}:{formatTime(minutes)}:{formatTime(seconds)}</div>
-            <button onClick={() => {setIsBattling(false)}} className='battle-stop'>Stop</button>
+            <button onClick={stopGame} className='battle-stop'>Stop</button>
           </div>
         )}
     </div>

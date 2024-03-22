@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
 import CharacterInfo from './CharacterInfo';
+import UserCharacterInfo from './UserCharacterInfo';
 
 function CharacterList(props) {
-    const { characters, isLoading } = props;
+    const { shop, characters, isLoading } = props;
     const [selectedCharacter, setSelectedCharacter] = useState();
 
     if (isLoading) {
@@ -17,7 +18,9 @@ function CharacterList(props) {
     }
 
     const characterList = characters.map((character) => (
+        (shop) ? (
         <CharacterCard 
+            shop={shop}
             key={character._id} 
             _id={character._id} 
             name={character.name} 
@@ -30,12 +33,28 @@ function CharacterList(props) {
             face={character.face}
             price={character.price}
             setSelectedCharacter={setSelectedCharacter}
+        />) : (
+            <CharacterCard 
+            shop={shop}
+            key={character._id} 
+            _id={character._id} 
+            name={character.name} 
+            description={character.description}
+            atk={character.atk}
+            spe={character.spe}
+            art={character.art}
+            face={character.face}
+            level={character.level} 
+            exp={character.exp}
+            maxExp={character.maxExp}
+            setSelectedCharacter={setSelectedCharacter}
         />
+        )
     ));
 
     return (
         <div className="character-list">
-            {(selectedCharacter) ? <CharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/> : characterList}
+            {(selectedCharacter) ? (shop ? <CharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/> : <UserCharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/>) : characterList}
         </div>
     );
 }

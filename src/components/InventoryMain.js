@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import UserCharacterList from './UserCharacterList';
+import CharacterList from './CharacterList';
 import { useUser } from '../context/UserContext';
 
-function CharactersMain() {
+function InventoryMain() {
     const { userId } = useUser();
     const [appState, setAppState] = useState({
         loading: false,
@@ -21,9 +21,9 @@ function CharactersMain() {
 
   return (
     <div className="shop-main">
-        <UserCharacterList isLoading={appState.loading} characters={appState.characters}/>
+        <CharacterList shop={false} isLoading={appState.loading} characters={appState.characters}/>
     </div>
   );
 }
 
-export default CharactersMain;
+export default InventoryMain;
