@@ -10,15 +10,18 @@ function Quests() {
   const [isAdding, setIsAdding] = useState(false);
 
   return (
-    <main className="quests">
-        <NavSub 
-          buttons={["All","Regular Tasks", "Recurrent Tasks", "Projects"]}
-          buttonFunction={setSelectedTab}
-        />
-        <QuestTaskList setSelectedTask={setSelectedTask} selectedTab={selectedTab}/>
-        {isAdding ? <QuestCreateTask setIsAdding={setIsAdding}/> : <QuestFocus selectedTask={selectedTask} setSelectedTask={setSelectedTask}/>}
-        <div id="absolute-position-add-quest"><button onClick={() => setIsAdding(true)} className="button-type-medium">Add</button></div>
-    </main>
+    <>
+      <main className="quests">
+          <NavSub 
+            buttons={["All","Regular Tasks", "Recurrent Tasks", "Projects"]}
+            buttonFunction={setSelectedTab}
+          />
+          <QuestTaskList setSelectedTask={setSelectedTask} selectedTab={selectedTab}/>
+          <QuestFocus selectedTask={selectedTask} setSelectedTask={setSelectedTask}/>
+          <div id="absolute-position-add-quest"><button onClick={() => setIsAdding(true)} className="button-type-medium">Add</button></div>
+      </main>
+      <QuestCreateTask isAdding={isAdding} setIsAdding={setIsAdding}/>
+    </>
   );
 }
 
