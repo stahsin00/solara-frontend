@@ -513,6 +513,10 @@ hr {
 .character-card {
   display: flex;
   flex-direction: column;
+  background-color: #2E2E2E;
+}
+
+.character-card div {
   background-color: black;
 }
 
@@ -649,6 +653,7 @@ hr {
   height: 60vh;
   position: absolute;
   top: 5vh;
+  white-space: pre;
 }
 
 .character-info-details h2 {
@@ -686,30 +691,38 @@ hr {
 .purchase-details {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   position: absolute;
   right: 1vh;
   bottom: 1vh;
+}
+
+.purchase-details div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .character-price {
   justify-content: center;
 }
 
-.character-add-to-team {
+#character-add-to-team {
   background-color: rgba(222, 222, 217, 0.95);
   font: inherit;
   color: black;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 5px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
   z-index: 1;
   position: absolute;
-  top: 1vh;
+  top: 4vh;
   right: 1vh;
+  width: 50px;
 }
 
-.character-add-to-team:hover {
+#character-add-to-team:hover {
   background-color: darkgray;
 }
 
