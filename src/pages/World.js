@@ -1,44 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '../context/UserContext';
 import { worldInfo, worldStart, worldStop } from '../utils/world';
+import { formatDoubleDigit } from '../utils/utils';
 
 function World() {
-    const { userId, currentTask, setCurrentTask } = useUser();
-    const [isBattling, setIsBattling] = useState(false);
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
-    const [healthBarWidth, setHealthBarWidth] = useState(100);
-    const [reward, setReward] = useState(0);
+  const { userId, currentTask, setCurrentTask } = useUser();
+  const [isBattling, setIsBattling] = useState(false);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [healthBarWidth, setHealthBarWidth] = useState(100);
+  const [reward, setReward] = useState(0);
 
-    function formatTime(value) {
-      return value < 10 ? `0${value}` : value;
-    }
-
-    function handleClick() {
-        setCurrentTask(null);
-    }
-
-    const fetchGameInfo = async () => {
-      if (!isBattling) {
-        return;
-      }
-
-      try {
-        const result = await worldInfo(userId);
-
-          if (!result.world.gameOn) {
-              stopGame();
-          } else {
-            setHours(result.world.hours);
-            setMinutes(result.world.minutes);
-            setSeconds(result.world.seconds);
-            setHealthBarWidth((result.world.enemyHealth / result.world.enemyMaxHealth) * 100);
-          }
-      } catch (e) {
-        console.error(e.message);
-      }
-  };
+  function handleClick() {
+      setCurrentTask(null);
+  }
 
   const handleStart = async () => {
     try {
@@ -47,29 +23,50 @@ function World() {
     } catch (e) {
       console.error(e.message);
     }
-};
+  };
 
-const stopGame = async () => {
-  try {
-    const result = await worldStop(userId);
+  const handleStop = async () => {
+    try {
+      const result = await worldStop(userId);
 
-    setReward(result.reward);
-    setIsBattling(false);
-  } catch (e) {
-    console.error(e.message);
-  }
-};
+      setReward(result.reward);
+      setIsBattling(false);
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
 
-// TODO: i forgot how this part works lol
-const intervalRef = useRef(null);
+  // TODO: i forgot how this part works lol
+  const fetchGameInfo = async () => {
+    if (!isBattling) {
+      return;
+    }
 
-useEffect(() => {
-  if (isBattling) {
-    intervalRef.current = setInterval(fetchGameInfo, 1000);
+    try {
+      const result = await worldInfo(userId);
 
-    return () => clearInterval(intervalRef.current);
-  }
-}, [userId, isBattling]);
+        if (!result.world.gameOn) {
+            handleStop();
+        } else {
+          setHours(result.world.hours);
+          setMinutes(result.world.minutes);
+          setSeconds(result.world.seconds);
+          setHealthBarWidth((result.world.enemyHealth / result.world.enemyMaxHealth) * 100);
+        }
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
+  
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (isBattling) {
+      intervalRef.current = setInterval(fetchGameInfo, 1000);
+
+      return () => clearInterval(intervalRef.current);
+    }
+  }, [userId, isBattling]);
 
   return (
     <div className="world">
@@ -96,8 +93,8 @@ useEffect(() => {
                 <div id='health' style={{ width: `${healthBarWidth}%` }}></div>
             </div>
             <img src={require('../slime.gif')} alt='animation of a slime being attacked' className='slime'></img>
-            <div className='timer'>{formatTime(hours)}:{formatTime(minutes)}:{formatTime(seconds)}</div>
-            <button onClick={stopGame} className='battle-stop'>Stop</button>
+            <div className='timer'>{formatDoubleDigit(hours)}:{formatDoubleDigit(minutes)}:{formatDoubleDigit(seconds)}</div>
+            <button onClick={handleStop} className='battle-stop'>Stop</button>
           </div>
         )}
     </div>
