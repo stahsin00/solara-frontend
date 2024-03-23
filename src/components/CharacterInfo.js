@@ -28,7 +28,7 @@ function CharacterInfo(props) {
         <div className='character-info-details'>
           <h2 className='character-info-name'>{selectedCharacter.name}</h2>
           <hr />
-          <div className='quest-description'>{selectedCharacter.description}</div>
+          <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.description}</div>
           <div className='stats'>
               <div>Base Atk: {selectedCharacter.atk}</div>
               <div>Base Spe: {selectedCharacter.spe}</div>

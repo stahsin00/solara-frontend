@@ -61,9 +61,9 @@ function UserCharacterInfo(props) {
     <div className="character-info">
         <div className='character-info-details'>
           <h2 className='character-info-name'>{selectedCharacter.name}</h2>
-          <button onClick={addToTeam} className='character-add-to-team'>Add To Team</button>
+          <button onClick={addToTeam} id='character-add-to-team'>+</button>
           <hr />
-          <div className='quest-description'>{selectedCharacter.description}</div>
+          <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.description}</div>
           <div className='stats'>
               <div>Atk: {selectedCharacter.atk}</div>
               <div>Spe: {selectedCharacter.spe}</div>
@@ -71,8 +71,9 @@ function UserCharacterInfo(props) {
           <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
           <div className='purchase-details'>
             <div>Exp: {exp} / {maxExp}</div>
+            <div>  |  </div>
             <div>Level: {level}</div>
-            <button onClick={handleClick}  className='character-info-buy'>Level Up</button>
+            <button onClick={handleClick}  className='character-info-buy'>Level</button>
           </div>
         </div>
         <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.art}`} alt='a character'></img></div>

@@ -117,7 +117,7 @@ useEffect(() => {
             <div className='rewards-earned-so-far'>{reward}<img src={require('../coin.png')} alt='a coin' /> earned so far.</div>
             <div className='set-timer-buttons'>
               <button onClick={startGame} className='set-timer-start'>Start</button>
-              <button onClick={handleClick} className='set-timer-cancel'>Cancel</button>
+              <button onClick={handleClick} className='set-timer-cancel'>Back</button>
             </div>
           </div>
         ) 
