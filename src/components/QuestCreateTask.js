@@ -55,6 +55,8 @@ function QuestCreateTask(props) {
         setTags("");
         setDifficulty("");
         setPriority("");
+
+        props.setIsAdding(false)
     }
 
     function handleChange(e) {
@@ -84,113 +86,118 @@ function QuestCreateTask(props) {
     }
 
     return (
-        <div className="focus create-task">
-            <form onSubmit={handleSubmit}>
-                <h2> Add Task </h2>
-                <label htmlFor="new-todo-name">Name:</label>
-                <input
-                    type="text"
-                    id="new-todo-name"
-                    name="name"
-                    autoComplete="off"
-                    value={name}
-                    onChange={handleChange}
-                    className="primary-input create-task-name"
-                />
+        props.isAdding ?
+        (<div className="create-task-background">
+            <div className="focus create-task">
+                <form onSubmit={handleSubmit}>
+                    <h2> Add Task </h2>
+                    <hr />
+                    <label htmlFor="new-todo-name">Name:</label>
+                    <input
+                        type="text"
+                        id="new-todo-name"
+                        name="name"
+                        autoComplete="off"
+                        value={name}
+                        onChange={handleChange}
+                        className="primary-input create-task-name"
+                    />
 
-                <label htmlFor="new-todo-description">Description:</label>
-                <textarea
-                    id="new-todo-description"
-                    name="description"
-                    value={description}
-                    onChange={handleChange}
-                    className="primary-input"
-                />
-                <div className="difficulty-input">
-                <label htmlFor="new-todo-type">Type:</label>
-                <select
-                    id="new-todo-type"
-                    name="type"
-                    value={type}
-                    onChange={handleChange}
-                >
-                    <option value="Regular">Regular</option>
-                    <option value="Recurrent">Recurrent</option>
-                </select>
-                <br></br>
-                </div>
-                <div className="difficulty-input">
-                <label>Difficulty:</label>
-                <label>
-                    <input
-                        type="radio"
-                        name="difficulty"
-                        value="easy"
-                        checked={difficulty === "easy"}
+                    <label htmlFor="new-todo-description">Description:</label>
+                    <textarea
+                        id="new-todo-description"
+                        name="description"
+                        value={description}
                         onChange={handleChange}
+                        className="primary-input"
                     />
-                    Easy
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="difficulty"
-                        value="medium"
-                        checked={difficulty === "medium"}
+                    <div className="difficulty-input">
+                    <label htmlFor="new-todo-type">Type:</label>
+                    <select
+                        id="new-todo-type"
+                        name="type"
+                        value={type}
                         onChange={handleChange}
-                    />
-                    Medium
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="difficulty"
-                        value="hard"
-                        checked={difficulty === "hard"}
-                        onChange={handleChange}
-                    />
-                    Hard
-                </label>
-                </div>
-                <div className="difficulty-input">
-                <label>Priority:</label>
-                <label>
-                    <input
-                        type="radio"
-                        name="priority"
-                        value="low"
-                        checked={priority === "low"}
-                        onChange={handleChange}
-                    />
-                    Low
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="priority"
-                        value="medium"
-                        checked={priority === "medium"}
-                        onChange={handleChange}
-                    />
-                    Medium
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="priority"
-                        value="high"
-                        checked={priority === "high"}
-                        onChange={handleChange}
-                    />
-                    High
-                </label>
-                </div>
-                <button type="submit" className="button-type-medium add-button">
-                Add
-                </button>
-        </form>
-        <button onClick={() => props.setIsAdding(false)} className="button-type-medium cancel-button">Cancel</button>
-      </div>
+                    >
+                        <option value="Regular">Regular</option>
+                        <option value="Recurrent">Recurrent</option>
+                    </select>
+                    </div>
+                    <div className="difficulty-input">
+                    <label>Difficulty:</label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="difficulty"
+                            value="easy"
+                            checked={difficulty === "easy"}
+                            onChange={handleChange}
+                        />
+                        Easy
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="difficulty"
+                            value="medium"
+                            checked={difficulty === "medium"}
+                            onChange={handleChange}
+                        />
+                        Medium
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="difficulty"
+                            value="hard"
+                            checked={difficulty === "hard"}
+                            onChange={handleChange}
+                        />
+                        Hard
+                    </label>
+                    </div>
+                    <div className="difficulty-input">
+                    <label>Priority:</label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="priority"
+                            value="low"
+                            checked={priority === "low"}
+                            onChange={handleChange}
+                        />
+                        Low
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="priority"
+                            value="medium"
+                            checked={priority === "medium"}
+                            onChange={handleChange}
+                        />
+                        Medium
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="priority"
+                            value="high"
+                            checked={priority === "high"}
+                            onChange={handleChange}
+                        />
+                        High
+                    </label>
+                    </div>
+                    <button type="submit" className="button-type-medium add-button">
+                    Add
+                    </button>
+                </form>
+                <button onClick={() => props.setIsAdding(false)} className="button-type-medium cancel-button">Cancel</button>
+            </div>
+        </div>)
+        :
+        <></>
     );
   }
   
