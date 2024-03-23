@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '../context/UserContext';
+import { worldInfo, worldStart, worldStop } from '../utils/world';
 
 function World() {
     const { userId, currentTask, setCurrentTask } = useUser();
@@ -24,76 +25,42 @@ function World() {
       }
 
       try {
-        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/gameinfo/${userId}`;
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-          });
+        const result = await worldInfo(userId);
 
-          if (response.ok) {
-              const result = await response.json();
-              if (!result.world.gameOn) {
-                stopGame();
-              }
-              setHours(result.world.hours);
-              setMinutes(result.world.minutes);
-              setSeconds(result.world.seconds);
-              setHealthBarWidth((result.world.enemyHealth / result.world.enemyMaxHealth) * 100)
+          if (!result.world.gameOn) {
+              stopGame();
           } else {
-              console.error('Failed to fetch game info:', response.statusText);
+            setHours(result.world.hours);
+            setMinutes(result.world.minutes);
+            setSeconds(result.world.seconds);
+            setHealthBarWidth((result.world.enemyHealth / result.world.enemyMaxHealth) * 100);
           }
-      } catch (error) {
-          console.error('Error fetching game info:', error.message);
+      } catch (e) {
+        console.error(e.message);
       }
   };
 
-  const startGame = async () => {
+  const handleStart = async () => {
     try {
-      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/startgame/${userId}`;
-      const data = {hours: hours, minutes: minutes};
-      const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-            console.error('Failed to fetch game info:', response.statusText);
-        } else {
-          setIsBattling(true);
-          const result = await response.json();
-        }
-    } catch (error) {
-        console.error('Error fetching game info:', error.message);
+      await worldStart(userId, hours, minutes);
+      setIsBattling(true);
+    } catch (e) {
+      console.error(e.message);
     }
 };
 
 const stopGame = async () => {
   try {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/stopgame/${userId}`;
-    const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-      });
+    const result = await worldStop(userId);
 
-      if (!response.ok) {
-          console.error('Failed to fetch game info:', response.statusText);
-      } else {
-        const result = await response.json();
-        setReward(result.reward);
-        setIsBattling(false);
-      }
-  } catch (error) {
-      console.error('Error fetching game info:', error.message);
+    setReward(result.reward);
+    setIsBattling(false);
+  } catch (e) {
+    console.error(e.message);
   }
 };
 
+// TODO: i forgot how this part works lol
 const intervalRef = useRef(null);
 
 useEffect(() => {
@@ -116,7 +83,7 @@ useEffect(() => {
             </form>
             <div className='rewards-earned-so-far'>{reward}<img src={require('../coin.png')} alt='a coin' /> earned so far.</div>
             <div className='set-timer-buttons'>
-              <button onClick={startGame} className='set-timer-start'>Start</button>
+              <button onClick={handleStart} className='set-timer-start'>Start</button>
               <button onClick={handleClick} className='set-timer-cancel'>Back</button>
             </div>
           </div>
