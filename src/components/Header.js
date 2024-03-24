@@ -1,31 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext';
+import { userInfo } from '../utils/user';
 
 function Header() {
   const { userId, username, tasksChanged } = useUser();
   const [balance, setBalance] = useState(0);
   const [exp, setExp] = useState(0);
 
-  const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/userinfo/${userId}`;
-  async function getUserInfo() {
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  async function fetchUserInfo() {
+    try {
+      const result = await userInfo(userId);
 
-    if (response.ok) {
-      const { user } = await response.json();
-      setBalance(user.balance);
-      setExp(user.exp);
-    } 
+      setBalance(result.balance);
+      setExp(result.exp);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // get info from server when there has been a change
   useEffect( () => {
-    getUserInfo();
+    fetchUserInfo();
   }, [tasksChanged]);
 
   return (

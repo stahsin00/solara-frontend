@@ -40,3 +40,21 @@ export async function userRegister(username, password) {
         throw new Error(message);
     }
 }
+
+export async function userInfo(userId) {
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/userinfo/${userId}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    });
+
+    if (response.ok) {
+        const { user } = await response.json();
+        return user;
+    } else {
+        throw new Error('unable to fetch user info');
+    }
+}
