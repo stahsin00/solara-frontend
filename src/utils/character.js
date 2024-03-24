@@ -96,3 +96,21 @@ export async function characterAddTeam(userId, characterId) {
         throw new Error('unable to add to team');
     }
 }
+
+export async function userTeam(userId) {
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/getteam/${userId}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    });
+
+    if (response.ok) {
+        const characters = await response.json();
+        return characters;
+    } else {
+        throw new Error('unable to fetch character list')
+    }
+}

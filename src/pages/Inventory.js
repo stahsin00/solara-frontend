@@ -11,7 +11,7 @@ function Inventory() {
           buttons={["Team","Characters", "Equipment"]}
           buttonFunction={setSelectedTab}
         />
-        <InventoryMain />
+        <InventoryMain selectedTab={selectedTab} />
     </main>
   );
 }
