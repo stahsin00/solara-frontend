@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import { characterAddTeam, characterLevel, userCharacterInfo } from '../utils/character';
 
 function UserCharacterInfo(props) {
   const { userId, tasksChanged, setTasksChanged } = useUser();
@@ -8,52 +9,26 @@ function UserCharacterInfo(props) {
     const [exp, setExp] = useState(selectedCharacter.exp);
     const [maxExp, setMaxExp] = useState(selectedCharacter.maxExp);
 
-    async function handleClick(e) {
-        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/levelcharacter/${userId}/${selectedCharacter._id}`;
-  
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        });
-  
-        if (response.ok) {
-          setTasksChanged(!tasksChanged);
-          const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/characterinfo/${userId}/${selectedCharacter._id}`;
-  
-          const responseNext = await fetch(apiUrl, {
-              method: 'GET',
-              headers: {
-              'Content-Type': 'application/json',
-              },
-          });
+    async function handleClick() {
+        try {
+          await characterLevel(userId, selectedCharacter._id);
 
-          if (responseNext.ok) {
-            const result = await responseNext.json();
-            setLevel(result.character.level);
-            setExp(result.character.exp);
-            setMaxExp(result.character.maxExp);
-          }
-        } else {
-          const result = await response.json();
-          console.log(result);
+          setTasksChanged(!tasksChanged);
+
+          const result = await userCharacterInfo(userId, selectedCharacter._id);
+          setLevel(result.character.level);
+          setExp(result.character.exp);
+          setMaxExp(result.character.maxExp);
+        } catch (e) {
+          console.error(e.message);
         }
     }
 
-    async function addToTeam(e) {
-        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtoteam/${userId}/${selectedCharacter._id}`;
-
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-          const result = await response.json();
-          console.log(result);
+    async function addToTeam() {
+        try {
+          await characterAddTeam(userId, selectedCharacter._id);
+        } catch (e) {
+          console.error(e.message);
         }
     }
 
