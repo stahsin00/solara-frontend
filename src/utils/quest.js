@@ -16,3 +16,18 @@ export async function questList(userId) {
         throw new Error(message);
     }
 }
+
+export async function questComplete(userId, taskId) {
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/completetask/${userId}/${taskId}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('unable to complete task');
+    }
+}
