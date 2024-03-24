@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useUser } from "../context/UserContext";
+import { questCreate } from "../utils/quest";
 
 function QuestCreateTask(props) {
     const [name, setName] = useState("");       
@@ -10,11 +11,17 @@ function QuestCreateTask(props) {
     const [priority, setPriority] = useState("");   
     const [error, setError] = useState();
     const [success, setSuccess] = useState();
+    const [loading, setLoading] = useState(false);
 
     const { userId, tasksChanged, setTasksChanged } = useUser();
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        if (loading) return;
+
+        setLoading(true);
+
         const time = 20;
         const newTask = {
             taskName: name,
@@ -26,37 +33,28 @@ function QuestCreateTask(props) {
             time
         };
 
-        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtask/${userId}`;
+        try {
+            const result = await questCreate(userId, newTask);
 
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newTask),
-        });
-
-        if (response.ok) {
-            const {message} = await response.json();
             setError(null);
-            setSuccess(message);
+            setSuccess(result);
             setTasksChanged(!tasksChanged);
-    
-        } else {
-            const {message} = await response.json();
-            setError(message);
+        } catch (error) {
+            console.error(error.message);
+            setError(error.message);
             setSuccess(null);
+        } finally {
+            setName("");
+            setDescription("");
+            setType("");
+            setTags("");
+            setDifficulty("");
+            setPriority("");
+
+            setLoading(false);
+            props.setIsAdding(false)
         }
 
-
-        setName("");
-        setDescription("");
-        setType("");
-        setTags("");
-        setDifficulty("");
-        setPriority("");
-
-        props.setIsAdding(false)
     }
 
     function handleChange(e) {

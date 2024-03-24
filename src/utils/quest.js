@@ -47,3 +47,24 @@ export async function questDelete(userId, taskId) {
         throw new Error(message);
     }
 }
+
+export async function questCreate(userId, newTask) {
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtask/${userId}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTask),
+    });
+
+    if (response.ok) {
+        const {message} = await response.json();
+        return message;
+
+    } else {
+        const {message} = await response.json();
+        throw new Error(message);
+    }
+}
