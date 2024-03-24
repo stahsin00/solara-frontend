@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import CharacterList from './CharacterList';
 import { useUser } from '../context/UserContext';
-import { userCharacterList } from '../utils/character';
+import { userCharacterList, userTeam } from '../utils/character';
 
-function InventoryMain() {
+function InventoryMain(props) {
   const { userId } = useUser();
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
 
   useEffect( () => {
     fetchUserCharacterList();
-  }, []);
+  }, [props.selectedTab]);
 
   async function fetchUserCharacterList() {
     setLoading(true);
 
     try {
-      const result = await userCharacterList(userId);
+      const response = (async () => {
+        if (props.selectedTab === 'Characters') {
+            return await userCharacterList(userId);
+        } else {
+            return await userTeam(userId);
+        }
+      });
+
+      const result = await response();
+      console.log(result);
+
       setCharacters(result.characters)
     } catch (e) {
       console.error(e.message);
