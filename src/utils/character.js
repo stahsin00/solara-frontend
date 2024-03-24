@@ -18,7 +18,7 @@ export async function characterList() {
 
 export async function userCharacterList(userId) {
     const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/characters/${userId}`;
-    
+
     const response = await fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -32,4 +32,19 @@ export async function userCharacterList(userId) {
     } else {
         throw new Error('unable to fetch character list')
     }
+}
+
+export async function characterBuy(userId, characterId) {
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addcharacter/${userId}/${characterId}`;
+  
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+  
+        if (!response.ok) {
+            throw new Error('unable to fetch character info')
+        } 
 }

@@ -1,25 +1,18 @@
 import React from 'react';
 import { useUser } from '../context/UserContext';
+import { characterBuy } from '../utils/character';
 
 function CharacterInfo(props) {
   const { userId, tasksChanged, setTasksChanged } = useUser();
     const { selectedCharacter, setSelectedCharacter } = props;
 
-    async function handleClick(e) {
-        const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addcharacter/${userId}/${selectedCharacter._id}`;
-  
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        });
-  
-        if (response.ok) {
+    async function handleClick() {
+        try {
+          await characterBuy(userId, selectedCharacter._id);
           setTasksChanged(!tasksChanged);
           setSelectedCharacter(null);
-        } else {
-          const result = await response.json();
+        } catch (e) {
+          console.error(e.message);
         }
     }
 
