@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import { userLogin, userRegister } from '../utils/user';
 
 function Login() {
   const [username, setUserName] = useState('');
@@ -10,8 +11,9 @@ function Login() {
   const { setUserId, setUsername, setIsLoggedIn } = useUser();
 
   // authentication from server
-  async function Login(e) {
+  async function handleLogin(e) {
     e.preventDefault();
+
     if (!loading) {
       if (!username.trim() || !password.trim()) {
         return;
@@ -19,70 +21,50 @@ function Login() {
 
       setLoading(true);
 
-      const data = {username: username, password: password};
-      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/login`;
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const { userId } = await response.json();
+      try {
+        const response = await userLogin(username, password);
+        
         setError(null);
         setSuccess(null);
 
-        setUserId(userId);
+        setUserId(response);
         setUsername(username);
         setIsLoggedIn(true);
-      } else {
-        const { message } = await response.json();
-        setError(message);
-        setSuccess(null);
-      }
 
-      setUserName("");
-      setPassword("");
-      setLoading(false);
+      } catch (e) {
+        setError(e.message);
+        setSuccess(null);
+      } finally {
+        setUserName("");
+        setPassword("");
+        setLoading(false);
+      }
     }
   }
 
   // attempts registration
-  async function Register(e) {
+  async function handleRegister(e) {
     e.preventDefault();
+
     if (!loading) {
       if (!username.trim() || !password.trim()) {
         return;
       }
 
-      const data = {username: username, password: password};
-      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/register`;
+      try {
+        const response = await userRegister(username, password);
 
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const { message } = await response.json();
         setError(null);
-        setSuccess(message);
+        setSuccess(response);
 
-      } else {
-        const { message } = await response.json();
-        setError(message);
-        setSuccess(null)
+      } catch (e) {
+        setError(e.message);
+        setSuccess(null);
+      } finally {
+        setUserName("");
+        setPassword("");
+        setLoading(false);
       }
-
-      setUserName("");
-      setPassword("");
-      setLoading(false);
     }
   }
 
@@ -109,8 +91,8 @@ function Login() {
         className='primary-input'
         required
       />
-      <button onClick={Login} className='button-type-medium'>Login</button>
-      <button onClick={Register} className='button-type-medium'>Sign Up</button>
+      <button onClick={handleLogin} className='button-type-medium'>Login</button>
+      <button onClick={handleRegister} className='button-type-medium'>Sign Up</button>
       {error ? (<div className='error-message'>{error}</div>) 
               : 
               (success ? (<div className='success-message'>{success}</div>) 
