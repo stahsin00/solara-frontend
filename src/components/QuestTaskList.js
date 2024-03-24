@@ -1,37 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import QuestTask from './QuestTask';
 import { useUser } from '../context/UserContext';
+import { questList } from '../utils/quest';
 
 function QuestTaskList(props) {
   const { userId, tasks, setTasks, tasksChanged } = useUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/tasks/${userId}`;
-  async function getTasks() {
+  async function fetchTasks() {
     setLoading(true);
 
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      const { tasks } = await response.json();
-      setTasks(tasks);
+    try {
+      const result = await questList(userId);
+      setTasks(result);
       setError(null);
-    } else {
-      const { message } = await response.json();
-      setError(message);
+    } catch (e) {
+      console.error(e.message);
+      setError(e.message);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   useEffect( () => {
-    getTasks();
+    fetchTasks();
   }, [tasksChanged]);
 
   const taskList = (error) ? (<div className='error-message'>{error}</div>) 
