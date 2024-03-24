@@ -1,5 +1,7 @@
+const baseUrl = `${process.env.REACT_APP_SERVER_URL}/world`;
+
 export async function worldInfo(userId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/gameinfo/${userId}`;
+    const apiUrl = `${baseUrl}/gameinfo/${userId}`;
     const response = await fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -16,7 +18,7 @@ export async function worldInfo(userId) {
 }
 
 export async function worldStart(userId, hours, minutes) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/startgame/${userId}`;
+    const apiUrl = `${baseUrl}/startgame/${userId}`;
     const data = {hours: hours, minutes: minutes};
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -35,7 +37,7 @@ export async function worldStart(userId, hours, minutes) {
 }
 
 export async function worldStop(userId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/stopgame/${userId}`;
+    const apiUrl = `${baseUrl}/stopgame/${userId}`;
     const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {

@@ -1,5 +1,7 @@
+const baseUrl = `${process.env.REACT_APP_SERVER_URL}/characters`;
+
 export async function characterList() {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/characters/all`;
+    const apiUrl = `${baseUrl}/all`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
@@ -17,7 +19,7 @@ export async function characterList() {
 }
 
 export async function userCharacterList(userId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/characters/${userId}`;
+    const apiUrl = `${baseUrl}/characters/${userId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
@@ -35,7 +37,7 @@ export async function userCharacterList(userId) {
 }
 
 export async function characterBuy(userId, characterId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addcharacter/${userId}/${characterId}`;
+    const apiUrl = `${baseUrl}/addcharacter/${userId}/${characterId}`;
   
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -50,7 +52,7 @@ export async function characterBuy(userId, characterId) {
 }
 
 export async function characterLevel(userId, characterId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/levelcharacter/${userId}/${characterId}`;
+    const apiUrl = `${baseUrl}/levelcharacter/${userId}/${characterId}`;
   
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -65,7 +67,7 @@ export async function characterLevel(userId, characterId) {
 }
 
 export async function userCharacterInfo(userId, characterId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/characterinfo/${userId}/${characterId}`;
+    const apiUrl = `${baseUrl}/characterinfo/${userId}/${characterId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
@@ -83,7 +85,7 @@ export async function userCharacterInfo(userId, characterId) {
 }
 
 export async function characterAddTeam(userId, characterId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtoteam/${userId}/${characterId}`;
+    const apiUrl = `${baseUrl}/addtoteam/${userId}/${characterId}`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -98,7 +100,7 @@ export async function characterAddTeam(userId, characterId) {
 }
 
 export async function userTeam(userId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/getteam/${userId}`;
+    const apiUrl = `${baseUrl}/getteam/${userId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',

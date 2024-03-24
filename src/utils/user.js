@@ -1,6 +1,8 @@
+const baseUrl = `${process.env.REACT_APP_SERVER_URL}/user`;
+
 export async function userLogin(username, password) {
     const data = {username: username, password: password};
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/login`;
+    const apiUrl = `${baseUrl}/login`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -21,7 +23,7 @@ export async function userLogin(username, password) {
 
 export async function userRegister(username, password) {
     const data = {username: username, password: password};
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/register`;
+    const apiUrl = `${baseUrl}/register`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -42,7 +44,7 @@ export async function userRegister(username, password) {
 }
 
 export async function userInfo(userId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/userinfo/${userId}`;
+    const apiUrl = `${baseUrl}/userinfo/${userId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',

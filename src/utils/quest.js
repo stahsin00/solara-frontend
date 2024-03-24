@@ -1,5 +1,7 @@
+const baseUrl = `${process.env.REACT_APP_SERVER_URL}/tasks`;
+
 export async function questList(userId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/tasks/${userId}`;
+    const apiUrl = `${baseUrl}/tasks/${userId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
@@ -18,7 +20,7 @@ export async function questList(userId) {
 }
 
 export async function questComplete(userId, taskId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/completetask/${userId}/${taskId}`;
+    const apiUrl = `${baseUrl}/completetask/${userId}/${taskId}`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -33,7 +35,7 @@ export async function questComplete(userId, taskId) {
 }
 
 export async function questDelete(userId, taskId) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/${userId}/${taskId}`;
+    const apiUrl = `${baseUrl}/${userId}/${taskId}`;
 
     const response = await fetch(apiUrl, {
         method: 'DELETE',
@@ -49,7 +51,7 @@ export async function questDelete(userId, taskId) {
 }
 
 export async function questCreate(userId, newTask) {
-    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/addtask/${userId}`;
+    const apiUrl = `${baseUrl}/addtask/${userId}`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
