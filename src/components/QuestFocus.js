@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useUser } from '../context/UserContext';
+import { questDelete } from '../utils/quest';
 
 function QuestFocus(props) {
   const { userId, setCurrentTask, tasksChanged, setTasksChanged } = useUser();
@@ -20,24 +21,16 @@ function QuestFocus(props) {
   async function handleDelete() {
     if (props.selectedTask && !loading) {
       setLoading(true);
-      const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/${userId}/${props.selectedTask._id}`;
 
-      const response = await fetch(apiUrl, {
-          method: 'DELETE',
-          headers: {
-          'Content-Type': 'application/json',
-          },
-      });
-
-      if (response.ok) {
+      try {
+        await questDelete(userId, props.selectedTask._id);
         setError(null);
-        setLoading(false);
         props.setSelectedTask(null);
         setTasksChanged(!tasksChanged);
-      } else {
-        const {message} = await response.json();
+      } catch (e) {
+        setError(e.message);
+      } finally {
         setLoading(false);
-        setError(message);
       }
     }
   }

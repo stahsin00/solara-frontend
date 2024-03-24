@@ -31,3 +31,19 @@ export async function questComplete(userId, taskId) {
         throw new Error('unable to complete task');
     }
 }
+
+export async function questDelete(userId, taskId) {
+    const apiUrl = `${process.env.REACT_APP_SERVER_URL}/user/${userId}/${taskId}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'DELETE',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        const {message} = await response.json();
+        throw new Error(message);
+    }
+}

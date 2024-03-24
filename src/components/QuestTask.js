@@ -15,7 +15,7 @@ function QuestTask(props) {
 
     setLoading(true);
 
-    setIsChecked(e.target.checked);
+    setIsChecked(true);
 
     try {
       await questComplete(userId, props.task._id);
