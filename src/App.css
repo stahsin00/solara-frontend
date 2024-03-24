@@ -474,13 +474,15 @@ main h2 {
   transform: translateY(-50%);
   margin: 0;
   padding: 0;
-  width: 2rem;
-  height: 2rem;
+  width: 30px;
+  height: 30px;
   box-sizing: border-box;
+  z-index: 50;
+  accent-color: #b7d264;
 }
 
-.QuestName input:checked {
-  color: #b7d264;
+.QuestName input[type="checkbox"]:hover {
+  cursor: pointer;
 }
 
 a {
