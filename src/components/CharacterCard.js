@@ -1,10 +1,13 @@
 import React from 'react';
+import { useUser } from '../context/UserContext';
 
 function CharacterCard(props) {
+    const { setSelection } = useUser();
     const { shop, _id, name, description, atk, spe, art, face, price, setSelectedCharacter } = props;
 
     function handleClick(e) {
       if (shop) {
+        setSelection(_id);
         setSelectedCharacter(
           {
             _id:_id,
@@ -18,6 +21,7 @@ function CharacterCard(props) {
           }
         )
       } else {
+        setSelection(_id);
         setSelectedCharacter(
           {
             _id:_id,
@@ -29,6 +33,7 @@ function CharacterCard(props) {
             face:face,
             level:props.level,
             exp: props.exp,
+            team: props.team,
             maxExp: props.maxExp
           }
         )

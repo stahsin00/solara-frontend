@@ -14,7 +14,8 @@ export async function characterList() {
         const characters = await response.json();
         return characters;
     } else {
-        throw new Error('unable to fetch character list')
+        const { message } = await response.json();
+        throw new Error(message);
     }
 }
 
@@ -32,7 +33,8 @@ export async function userCharacterList(userId) {
         const characters = await response.json();
         return characters;
     } else {
-        throw new Error('unable to fetch character list')
+        const { message } = await response.json();
+        throw new Error(message);
     }
 }
 
@@ -47,7 +49,8 @@ export async function characterBuy(userId, characterId) {
         });
   
         if (!response.ok) {
-            throw new Error('unable to fetch character info')
+            const { message } = await response.json();
+            throw new Error(message);
         } 
 }
 
@@ -62,7 +65,8 @@ export async function characterLevel(userId, characterId) {
     });
 
     if (!response.ok) {
-        throw new Error('unable to level character');
+        const { message } = await response.json();
+        throw new Error(message);
     }
 }
 
@@ -80,7 +84,8 @@ export async function userCharacterInfo(userId, characterId) {
         const result = await response.json();
         return result;
     } else {
-        throw new Error('unable to fetch character info');
+        const { message } = await response.json();
+        throw new Error(message);
     }
 }
 
@@ -95,7 +100,24 @@ export async function characterAddTeam(userId, characterId) {
     });
 
     if (!response.ok) {
-        throw new Error('unable to add to team');
+        const { message } = await response.json();
+        throw new Error(message);
+    }
+}
+
+export async function characterRemoveTeam(userId, characterId) {
+    const apiUrl = `${baseUrl}/removefromteam/${userId}/${characterId}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        throw new Error(message);
     }
 }
 
@@ -113,6 +135,7 @@ export async function userTeam(userId) {
         const characters = await response.json();
         return characters;
     } else {
-        throw new Error('unable to fetch character list')
+        const { message } = await response.json();
+        throw new Error(message);
     }
 }

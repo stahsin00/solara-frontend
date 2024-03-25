@@ -3,12 +3,12 @@ import InventoryMain from '../components/InventoryMain';
 import NavSub from '../components/NavSub';
 
 function Inventory() {
-  const [selectedTab, setSelectedTab] = useState();
+  const [selectedTab, setSelectedTab] = useState("Characters");
 
   return (
     <main className="inventory">
         <NavSub 
-          buttons={["Team","Characters", "Equipment"]}
+          buttons={["Team","Characters","Equipment"]}
           buttonFunction={setSelectedTab}
         />
         <InventoryMain selectedTab={selectedTab} />
