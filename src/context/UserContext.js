@@ -13,6 +13,7 @@ export function UserProvider(props) {
     const [tasks, setTasks] = useState([]);
     const [tasksChanged, setTasksChanged] = useState(false);
     const [currentTask, setCurrentTask] = useState();
+    const [selection, setSelection] = useState();
 
     const logout = () => {
         setUserId(null);
@@ -35,6 +36,8 @@ export function UserProvider(props) {
         setTasksChanged,
         currentTask,
         setCurrentTask,
+        selection,
+        setSelection,
         logout
     }
 

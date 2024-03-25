@@ -10,8 +10,6 @@ function CharacterList(props) {
     if (isLoading) {
         return <div>loading</div>
       }
-
-      console.log(characters);
   
     if (!characters || characters.length === 0) {
         return (<p>No characters.</p>)
@@ -47,6 +45,7 @@ function CharacterList(props) {
             level={character.level} 
             exp={character.exp}
             maxExp={character.maxExp}
+            team={character.team}
             setSelectedCharacter={setSelectedCharacter}
         />
         )

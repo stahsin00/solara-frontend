@@ -25,7 +25,6 @@ function InventoryMain(props) {
       });
 
       const result = await response();
-      console.log(result);
 
       setCharacters(result.characters)
     } catch (e) {
