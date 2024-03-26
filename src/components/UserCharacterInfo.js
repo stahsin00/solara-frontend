@@ -3,7 +3,7 @@ import { useUser } from '../context/UserContext';
 import { characterAddTeam, characterLevel, characterRemoveTeam, userCharacterInfo } from '../utils/character';
 
 function UserCharacterInfo(props) {
-  const { userId, tasksChanged, setTasksChanged, selection } = useUser();
+  const { userId, tasksChanged, setTasksChanged } = useUser();
     const { selectedCharacter, setSelectedCharacter } = props;
     const [team, setTeam] = useState(false);
     const [level, setLevel] = useState(0);
@@ -16,10 +16,9 @@ function UserCharacterInfo(props) {
     }, []);
 
     async function setUpInfo() {
-      console.log('setUpInfo');
       setLoading(true);
       try {
-        const result = await userCharacterInfo(userId, selection);
+        const result = await userCharacterInfo(userId, selectedCharacter._id);
         setLevel(result.character.level);
         setExp(result.character.exp);
         setMaxExp(result.character.maxExp);
@@ -32,15 +31,14 @@ function UserCharacterInfo(props) {
     }
 
     async function handleLevel() {
-      console.log('handleLevel');
       if (loading) return;
       setLoading(true);
         try {
-          await characterLevel(userId, selection);
+          await characterLevel(userId, selectedCharacter._id);
 
           setTasksChanged(!tasksChanged);
 
-          const result = await userCharacterInfo(userId, selection);
+          const result = await userCharacterInfo(userId, selectedCharacter._id);
           setLevel(result.character.level);
           setExp(result.character.exp);
           setMaxExp(result.character.maxExp);
@@ -52,7 +50,6 @@ function UserCharacterInfo(props) {
     }
 
     function handleClick() {
-      console.log('handleClick');
       if (team) {
         RemoveFromTeam();
       } else {
@@ -61,7 +58,6 @@ function UserCharacterInfo(props) {
     }
 
     async function addToTeam() {
-      console.log('addToTeam');
       if (loading) return;
       setLoading(true);
         try {
@@ -79,7 +75,6 @@ function UserCharacterInfo(props) {
     }
 
     async function RemoveFromTeam() {
-      console.log('RemoveFromTeam');
       if (loading) return;
       setLoading(true);
       try {
