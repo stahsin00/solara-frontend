@@ -4,17 +4,17 @@ import { characterBuy } from '../utils/character';
 
 function CharacterInfo(props) {
   const { userId, tasksChanged, setTasksChanged } = useUser();
-    const { selectedCharacter, setSelectedCharacter } = props;
+  const { selectedCharacter, setSelectedCharacter } = props;
 
-    async function handleClick() {
-        try {
-          await characterBuy(userId, selectedCharacter._id);
-          setTasksChanged(!tasksChanged);
-          setSelectedCharacter(null);
-        } catch (e) {
-          console.error(e.message);
-        }
-    }
+  async function handleClick() {
+      try {
+        await characterBuy(userId, selectedCharacter._id);
+        setTasksChanged(!tasksChanged);
+        setSelectedCharacter(null);
+      } catch (e) {
+        console.error(e.message);
+      }
+  }
 
   return (
     <div className="character-info">

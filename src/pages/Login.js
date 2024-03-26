@@ -8,7 +8,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
-  const { setUserId, setUsername, setIsLoggedIn } = useUser();
+  const { setUserId, setUsername, setIsLoggedIn, setSelectedPage } = useUser();
 
   // authentication from server
   async function handleLogin(e) {
@@ -29,6 +29,9 @@ function Login() {
 
         setUserId(response);
         setUsername(username);
+
+        setSelectedPage('Quests');
+
         setIsLoggedIn(true);
 
       } catch (e) {

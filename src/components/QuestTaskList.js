@@ -4,7 +4,7 @@ import { useUser } from '../context/UserContext';
 import { questList } from '../utils/quest';
 
 function QuestTaskList(props) {
-  const { userId, tasks, setTasks, tasksChanged } = useUser();
+  const { userId, tasks, setTasks, tasksChanged, selectedTab } = useUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -39,7 +39,7 @@ function QuestTaskList(props) {
 
   return (
     <div className="quest-tasks">
-        {(props.selectedTab == "All") ?
+        {(selectedTab == "All") ?
         (<div className='all-quests'>
           <h2>All</h2>
           <hr />

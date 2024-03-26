@@ -16,39 +16,12 @@ function CharacterList(props) {
     }
 
     const characterList = characters.map((character) => (
-        (shop) ? (
         <CharacterCard 
             shop={shop}
             key={character._id} 
-            _id={character._id} 
-            name={character.name} 
-            description={character.description} 
-            atk={character.atk} 
-            def={character.def}
-            hp={character.hp}
-            spe={character.spe}
-            art={character.art}
-            face={character.face}
-            price={character.price}
-            setSelectedCharacter={setSelectedCharacter}
-        />) : (
-            <CharacterCard 
-            shop={shop}
-            key={character._id} 
-            _id={character._id} 
-            name={character.name} 
-            description={character.description}
-            atk={character.atk}
-            spe={character.spe}
-            art={character.art}
-            face={character.face}
-            level={character.level} 
-            exp={character.exp}
-            maxExp={character.maxExp}
-            team={character.team}
+            character={character}
             setSelectedCharacter={setSelectedCharacter}
         />
-        )
     ));
 
     return (

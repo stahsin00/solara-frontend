@@ -3,21 +3,28 @@ import CharacterList from './CharacterList';
 import { useUser } from '../context/UserContext';
 import { userCharacterList, userTeam } from '../utils/character';
 
-function InventoryMain(props) {
-  const { userId } = useUser();
+function InventoryMain() {
+  const { userId, selectedTab, setSelectedTab } = useUser();
+  const [init, setInit] = useState(true);
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
 
+  useEffect(() => {
+    setSelectedTab('Characters');
+    setInit(false);
+  }, []);
+
   useEffect( () => {
     fetchUserCharacterList();
-  }, [props.selectedTab]);
+  }, [selectedTab]);
 
   async function fetchUserCharacterList() {
+    if (loading) return;
     setLoading(true);
 
     try {
       const response = (async () => {
-        if (props.selectedTab === 'Characters') {
+        if (selectedTab === 'Characters' || init) {
             return await userCharacterList(userId);
         } else {
             return await userTeam(userId);
@@ -36,7 +43,7 @@ function InventoryMain(props) {
 
   return (
     <div className="shop-main">
-        <CharacterList shop={false} isLoading={loading} characters={characters}/>
+        <CharacterList shop={false} isLoading={init ? init : loading} characters={characters}/>
     </div>
   );
 }
