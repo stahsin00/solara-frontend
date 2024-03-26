@@ -6,7 +6,7 @@ import { useUser } from '../context/UserContext';
 function ShopMain() {
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
-  const {selectedTab} = useUser();
+  const {selectedTab, setSelectedTab} = useUser();
 
   useEffect( () => {
     fetchCharacterList();
