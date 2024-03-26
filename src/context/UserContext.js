@@ -14,13 +14,14 @@ export function UserProvider(props) {
     const [tasksChanged, setTasksChanged] = useState(false);
     const [currentTask, setCurrentTask] = useState();
     const [selectedPage, setSelectedPage] = useState('Quests');
+    const [selectedTab, setSelectedTab] = useState('All');
     const [selection, setSelection] = useState();
 
     const logout = () => {
         setUserId(null);
         setUsername(null);
         setIsLoggedIn(false);
-        setTasks([])
+        setTasks([]);
         setCurrentTask(null);
     }
 
@@ -39,6 +40,8 @@ export function UserProvider(props) {
         setCurrentTask,
         selectedPage,
         setSelectedPage,
+        selectedTab,
+        setSelectedTab,
         selection,
         setSelection,
         logout

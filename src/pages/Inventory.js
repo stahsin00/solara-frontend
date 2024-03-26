@@ -1,17 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import InventoryMain from '../components/InventoryMain';
 import NavSub from '../components/NavSub';
+import { useUser } from '../context/UserContext';
 
 function Inventory() {
-  const [selectedTab, setSelectedTab] = useState("Characters");
+  const {setSelectedTab} = useUser();
+
+  useEffect( () => {
+    setSelectedTab('Characters');
+  }, []);
 
   return (
     <main className="inventory">
         <NavSub 
           buttons={["Team","Characters","Equipment"]}
-          buttonFunction={setSelectedTab}
         />
-        <InventoryMain selectedTab={selectedTab} />
+        <InventoryMain />
     </main>
   );
 }

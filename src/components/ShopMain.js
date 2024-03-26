@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import CharacterList from './CharacterList';
 import { characterList } from '../utils/character';
+import { useUser } from '../context/UserContext';
 
 function ShopMain() {
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const {selectedTab} = useUser();
 
   useEffect( () => {
     fetchCharacterList();

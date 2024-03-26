@@ -3,21 +3,21 @@ import CharacterList from './CharacterList';
 import { useUser } from '../context/UserContext';
 import { userCharacterList, userTeam } from '../utils/character';
 
-function InventoryMain(props) {
-  const { userId } = useUser();
+function InventoryMain() {
+  const { userId, selectedTab } = useUser();
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
 
   useEffect( () => {
     fetchUserCharacterList();
-  }, [props.selectedTab]);
+  }, [selectedTab]);
 
   async function fetchUserCharacterList() {
     setLoading(true);
 
     try {
       const response = (async () => {
-        if (props.selectedTab === 'Characters') {
+        if (selectedTab === 'Characters') {
             return await userCharacterList(userId);
         } else {
             return await userTeam(userId);

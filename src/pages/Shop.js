@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import ShopMain from '../components/ShopMain';
 import NavSub from '../components/NavSub';
+import { useUser } from '../context/UserContext';
 
 function Shop() {
-  const [selectedTab, setSelectedTab] = useState();
+  const {setSelectedTab} = useUser();
+
+  useEffect( () => {
+    setSelectedTab('Characters');
+  }, []);
 
   return (
     <main className="shop">
         <NavSub 
           buttons={["Featured", "Characters","Equipment"]}
-          buttonFunction={setSelectedTab}
         />
-        <ShopMain selectedTab={selectedTab}/>
+        <ShopMain />
     </main>
   );
 }

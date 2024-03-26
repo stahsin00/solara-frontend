@@ -1,9 +1,11 @@
 import React from 'react';
+import { useUser } from '../context/UserContext';
 
 function NavSub(props) {
+    const { selectedTab, setSelectedTab } = useUser();
 
     const buttonList = props.buttons.map((button) => (
-        <button onClick={() => props.buttonFunction(button)} key={button} className='button-type-dark'>{button}</button>
+        <button onClick={() => setSelectedTab(button)} key={button} className={(selectedTab === button) ? 'button-type-dark-selected' : 'button-type-dark'}>{button}</button>
     ));
 
   return (
