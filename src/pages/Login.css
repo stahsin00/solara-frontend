@@ -1,7 +1,7 @@
 .login {
     background-color: rgba(0, 0, 0, 0.8);
     width: 30em;
-    height: 25em;
+    padding-bottom: 7vh;
     text-align: center;
     position: absolute;
     left: 50%;
@@ -9,14 +9,19 @@
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
+
+.login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
 .login img {
     width: 7vh;
+    height: 7vh;
     image-rendering: auto;
-    padding-top: 1vh;
   }
   
 .login-title {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useUser } from '../context/UserContext';
-import { characterAddTeam, characterLevel, characterRemoveTeam, userCharacterInfo } from '../utils/character';
+import { useUser } from '../../context/UserContext';
+import { characterAddTeam, characterLevel, characterRemoveTeam, userCharacterInfo } from '../../utils/character';
 import './CharacterInfo.css';
 
 function UserCharacterInfo(props) {
-  const { userId, tasksChanged, setTasksChanged } = useUser();
+  const { tasksChanged, setTasksChanged } = useUser();
     const { selectedCharacter, setSelectedCharacter } = props;
     const [team, setTeam] = useState(false);
     const [level, setLevel] = useState(0);
@@ -19,7 +19,7 @@ function UserCharacterInfo(props) {
     async function setUpInfo() {
       setLoading(true);
       try {
-        const result = await userCharacterInfo(userId, selectedCharacter._id);
+        const result = await userCharacterInfo(selectedCharacter._id);
         setLevel(result.character.level);
         setExp(result.character.exp);
         setMaxExp(result.character.maxExp);
@@ -35,11 +35,11 @@ function UserCharacterInfo(props) {
       if (loading) return;
       setLoading(true);
         try {
-          await characterLevel(userId, selectedCharacter._id);
+          await characterLevel(selectedCharacter._id);
 
           setTasksChanged(!tasksChanged);
 
-          const result = await userCharacterInfo(userId, selectedCharacter._id);
+          const result = await userCharacterInfo(selectedCharacter._id);
           setLevel(result.character.level);
           setExp(result.character.exp);
           setMaxExp(result.character.maxExp);
@@ -62,11 +62,11 @@ function UserCharacterInfo(props) {
       if (loading) return;
       setLoading(true);
         try {
-          await characterAddTeam(userId, selectedCharacter._id);
+          await characterAddTeam(selectedCharacter._id);
 
           setTasksChanged(!tasksChanged);
 
-          const result = await userCharacterInfo(userId, selectedCharacter._id);
+          const result = await userCharacterInfo(selectedCharacter._id);
           setTeam(result.character.team);
         } catch (e) {
           console.error(e.message);
@@ -79,11 +79,11 @@ function UserCharacterInfo(props) {
       if (loading) return;
       setLoading(true);
       try {
-        await characterRemoveTeam(userId, selectedCharacter._id);
+        await characterRemoveTeam(selectedCharacter._id);
 
         setTasksChanged(!tasksChanged);
 
-        const result = await userCharacterInfo(userId, selectedCharacter._id);
+        const result = await userCharacterInfo(selectedCharacter._id);
         setTeam(result.character.team);
       } catch (e) {
         console.error(e.message);

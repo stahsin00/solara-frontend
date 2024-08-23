@@ -18,11 +18,11 @@ import World from './pages/World';
 
 
 function App() {
-  const { isLoggedIn, currentTask, logout } = useUser();
+  const { user, currentTask, logout } = useUser();
 
   return (
     <>
-      {!isLoggedIn ? (<Login />) : (currentTask ? (<World />) :
+      {!user ? (<Login />) : (currentTask ? (<World />) :
       (<div className="App">
         <Header />
         <Nav />

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import CharacterList from './CharacterList';
+import CharacterList from './characters/CharacterList';
 import { useUser } from '../context/UserContext';
 import { userCharacterList, userTeam } from '../utils/character';
 
 function InventoryMain() {
-  const { userId, selectedTab, setSelectedTab } = useUser();
+  const { selectedTab, setSelectedTab } = useUser();
   const [init, setInit] = useState(true);
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
@@ -25,9 +25,9 @@ function InventoryMain() {
     try {
       const response = (async () => {
         if (selectedTab === 'Characters' || init) {
-            return await userCharacterList(userId);
+            return await userCharacterList();
         } else {
-            return await userTeam(userId);
+            return await userTeam();
         }
       });
 

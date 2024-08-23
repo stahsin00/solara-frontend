@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
 import CharacterInfo from './CharacterInfo';
-import UserCharacterInfo from '../UserCharacterInfo';
+import UserCharacterInfo from './UserCharacterInfo';
 import './CharacterList.css';
 
 function CharacterList(props) {

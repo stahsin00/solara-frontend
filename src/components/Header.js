@@ -5,13 +5,13 @@ import { userInfo } from '../utils/user';
 import './Header.css';
 
 function Header() {
-  const { userId, username, tasksChanged } = useUser();
+  const { tasksChanged } = useUser();
   const [balance, setBalance] = useState(0);
   const [exp, setExp] = useState(0);
 
   async function fetchUserInfo() {
     try {
-      const result = await userInfo(userId);
+      const result = await userInfo();
 
       setBalance(result.balance);
       setExp(result.exp);
@@ -32,7 +32,7 @@ function Header() {
         <div className='header-user-info'>
           <div className='header-funds'><img src={require('../exp.png')} alt='a book' /> {exp}</div>
           <div className='header-funds'><img src={require('../coin.png')} alt='a coin' /> {balance}</div>
-          <div id="header-username">{username}</div>
+          <div id="header-username">TODO</div>
         </div>
     </header>
   );
