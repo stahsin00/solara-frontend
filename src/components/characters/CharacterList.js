@@ -19,7 +19,7 @@ function CharacterList(props) {
     const characterList = characters.map((character) => (
         <CharacterCard 
             shop={shop}
-            key={character._id} 
+            key={character.id} 
             character={character}
             setSelectedCharacter={setSelectedCharacter}
         />

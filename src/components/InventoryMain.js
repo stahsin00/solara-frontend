@@ -32,8 +32,7 @@ function InventoryMain() {
       });
 
       const result = await response();
-
-      setCharacters(result.characters)
+      setCharacters(result)
     } catch (e) {
       console.error(e.message);
     } finally {

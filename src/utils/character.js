@@ -62,7 +62,7 @@ export async function characterLevel(characterId) {
 }
 
 export async function userCharacterInfo(characterId) {
-    const apiUrl = `${baseUrl}/character/user/${characterId}`;
+    const apiUrl = `${baseUrl}/user/${characterId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
