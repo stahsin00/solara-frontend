@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CharacterList from './CharacterList';
+import CharacterList from './characters/CharacterList';
 import { characterList } from '../utils/character';
 import { useUser } from '../context/UserContext';
 

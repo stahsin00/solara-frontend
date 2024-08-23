@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '../context/UserContext';
 import { worldInfo, worldStart, worldStop } from '../utils/world';
 import { formatDoubleDigit } from '../utils/utils';
+import './World.css';
 
 function World() {
-  const { userId, currentTask, setCurrentTask } = useUser();
+  const { currentTask, setCurrentTask } = useUser();
   const [isBattling, setIsBattling] = useState(false);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -18,7 +19,7 @@ function World() {
 
   const handleStart = async () => {
     try {
-      await worldStart(userId, hours, minutes);
+      await worldStart(hours, minutes);
       setIsBattling(true);
     } catch (e) {
       console.error(e.message);
@@ -27,7 +28,7 @@ function World() {
 
   const handleStop = async () => {
     try {
-      const result = await worldStop(userId);
+      const result = await worldStop();
 
       setReward(result.reward);
       setIsBattling(false);
@@ -43,7 +44,7 @@ function World() {
     }
 
     try {
-      const result = await worldInfo(userId);
+      const result = await worldInfo();
 
         if (!result.world.gameOn) {
             handleStop();
@@ -66,7 +67,7 @@ function World() {
 
       return () => clearInterval(intervalRef.current);
     }
-  }, [userId, isBattling]);
+  }, [isBattling]);
 
   return (
     <div className="world">

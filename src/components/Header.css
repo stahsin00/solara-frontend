@@ -1,0 +1,44 @@
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 8vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    image-rendering: auto;
+  }
+  
+.header-title {
+    font-family: var(--heading-font);
+    font-weight: normal;
+    font-size: 4vh;
+  }
+  
+header img {
+    width: 7vh;
+  }
+  
+.header-user-info {
+    position: absolute;
+    right: 10px;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+.header-funds {
+    display: flex;
+    flex-direction: row;
+  }
+  
+.header-funds img {
+    width: 2.5vh;
+    height: 2.5vh;
+    image-rendering: pixelated;
+  }
+  
+.header-user-info div {
+    margin-left: 5vh;
+  }

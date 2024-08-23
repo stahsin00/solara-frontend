@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useUser } from "../context/UserContext";
-import { questCreate } from "../utils/quest";
+import { useUser } from "../../context/UserContext";
+import { questCreate } from "../../utils/quest";
+import './QuestCreateTask.css';
 
 function QuestCreateTask(props) {
     const [name, setName] = useState("");       
@@ -13,7 +14,7 @@ function QuestCreateTask(props) {
     const [success, setSuccess] = useState();
     const [loading, setLoading] = useState(false);
 
-    const { userId, tasksChanged, setTasksChanged } = useUser();
+    const { tasksChanged, setTasksChanged } = useUser();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -34,7 +35,7 @@ function QuestCreateTask(props) {
         };
 
         try {
-            const result = await questCreate(userId, newTask);
+            const result = await questCreate(newTask);
 
             setError(null);
             setSuccess(result);

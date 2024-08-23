@@ -1,13 +1,10 @@
-const baseUrl = `${process.env.REACT_APP_SERVER_URL}/characters`;
+const baseUrl = `${process.env.REACT_APP_SERVER_URL}/character`;
 
 export async function characterList() {
-    const apiUrl = `${baseUrl}/all`;
+    const apiUrl = `${baseUrl}`;
 
     const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: 'GET'
     });
 
     if (response.ok) {
@@ -19,14 +16,12 @@ export async function characterList() {
     }
 }
 
-export async function userCharacterList(userId) {
-    const apiUrl = `${baseUrl}/characters/${userId}`;
+export async function userCharacterList() {
+    const apiUrl = `${baseUrl}/user`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        credentials: "include"
     });
 
     if (response.ok) {
@@ -38,14 +33,12 @@ export async function userCharacterList(userId) {
     }
 }
 
-export async function characterBuy(userId, characterId) {
-    const apiUrl = `${baseUrl}/addcharacter/${userId}/${characterId}`;
+export async function characterBuy(characterId) {
+    const apiUrl = `${baseUrl}/add/${characterId}`;
   
         const response = await fetch(apiUrl, {
             method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
+            credentials: "include"
         });
   
         if (!response.ok) {
@@ -54,14 +47,12 @@ export async function characterBuy(userId, characterId) {
         } 
 }
 
-export async function characterLevel(userId, characterId) {
-    const apiUrl = `${baseUrl}/levelcharacter/${userId}/${characterId}`;
+export async function characterLevel(characterId) {
+    const apiUrl = `${baseUrl}/level/${characterId}`;
   
     const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
+        method: 'PATCH',
+        credentials: "include"
     });
 
     if (!response.ok) {
@@ -70,14 +61,12 @@ export async function characterLevel(userId, characterId) {
     }
 }
 
-export async function userCharacterInfo(userId, characterId) {
-    const apiUrl = `${baseUrl}/characterinfo/${userId}/${characterId}`;
+export async function userCharacterInfo(characterId) {
+    const apiUrl = `${baseUrl}/character/user/${characterId}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        },
+        credentials: "include"
     });
 
     if (response.ok) {
@@ -89,14 +78,16 @@ export async function userCharacterInfo(userId, characterId) {
     }
 }
 
-export async function characterAddTeam(userId, characterId) {
-    const apiUrl = `${baseUrl}/addtoteam/${userId}/${characterId}`;
+export async function characterAddTeam(characterId, position) {
+    const apiUrl = `${baseUrl}/addtoteam/${characterId}`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: "include",
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ position })
     });
 
     if (!response.ok) {
@@ -105,14 +96,16 @@ export async function characterAddTeam(userId, characterId) {
     }
 }
 
-export async function characterRemoveTeam(userId, characterId) {
-    const apiUrl = `${baseUrl}/removefromteam/${userId}/${characterId}`;
+export async function characterRemoveTeam(position) {
+    const apiUrl = `${baseUrl}/removefromteam`;
 
     const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: 'PATCH',
+        credentials: "include",
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ position })
     });
 
     if (!response.ok) {
@@ -121,14 +114,12 @@ export async function characterRemoveTeam(userId, characterId) {
     }
 }
 
-export async function userTeam(userId) {
-    const apiUrl = `${baseUrl}/getteam/${userId}`;
+export async function userTeam() {
+    const apiUrl = `${baseUrl}/team`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        credentials: "include"
     });
 
     if (response.ok) {

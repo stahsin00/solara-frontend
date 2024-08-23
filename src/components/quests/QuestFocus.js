@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { useUser } from '../context/UserContext';
-import { questDelete } from '../utils/quest';
+import { useUser } from '../../context/UserContext';
+import { questDelete } from '../../utils/quest';
+import './QuestFocus.css';
 
 function QuestFocus(props) {
-  const { userId, setCurrentTask, tasksChanged, setTasksChanged } = useUser();
+  const { setCurrentTask, tasksChanged, setTasksChanged } = useUser();
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
 
@@ -23,7 +24,7 @@ function QuestFocus(props) {
       setLoading(true);
 
       try {
-        await questDelete(userId, props.selectedTask._id);
+        await questDelete(props.selectedTask._id);
         setError(null);
         props.setSelectedTask(null);
         setTasksChanged(!tasksChanged);

@@ -1,4 +1,5 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+import { userInfo, userLogout } from '../utils/user';
 
 const UserContext = React.createContext();
 
@@ -7,30 +8,40 @@ export function useUser() {
 }
 
 export function UserProvider(props) {
-    const [userId, setUserId] = useState();
-    const [username, setUsername] = useState();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState();
+
     const [tasks, setTasks] = useState([]);
     const [tasksChanged, setTasksChanged] = useState(false);
     const [currentTask, setCurrentTask] = useState();
+
     const [selectedPage, setSelectedPage] = useState('Quests');
     const [selectedTab, setSelectedTab] = useState('All');
 
-    const logout = () => {
-        setUserId(null);
-        setUsername(null);
-        setIsLoggedIn(false);
+    useEffect(() => {
+        const run = async () => {
+          try {
+            const userResponse = await userInfo();
+            setUser(userResponse);
+          } catch {
+            // TODO
+          }
+          
+        };
+        run();
+      }, []);
+
+    const logout = async () => {
+        await userLogout();
+
+        setUser(null);
+        
         setTasks([]);
         setCurrentTask(null);
     }
 
     const value = {
-        userId, 
-        setUserId,
-        username,
-        setUsername,
-        isLoggedIn, 
-        setIsLoggedIn,
+        user, 
+        setUser,
         tasks,
         setTasks,
         tasksChanged,

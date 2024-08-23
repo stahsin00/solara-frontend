@@ -1,14 +1,15 @@
 import React from 'react';
-import { useUser } from '../context/UserContext';
-import { characterBuy } from '../utils/character';
+import { useUser } from '../../context/UserContext';
+import { characterBuy } from '../../utils/character';
+import './CharacterInfo.css';
 
 function CharacterInfo(props) {
-  const { userId, tasksChanged, setTasksChanged } = useUser();
+  const { tasksChanged, setTasksChanged } = useUser();
   const { selectedCharacter, setSelectedCharacter } = props;
 
   async function handleClick() {
       try {
-        await characterBuy(userId, selectedCharacter._id);
+        await characterBuy(selectedCharacter._id);
         setTasksChanged(!tasksChanged);
         setSelectedCharacter(null);
       } catch (e) {
@@ -28,7 +29,7 @@ function CharacterInfo(props) {
           </div>
           <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
           <div className='purchase-details'>
-            <div><img src={require('../coin.png')} alt='a coin' className='character-price'/> {selectedCharacter.price}</div>
+            <div><img src={require('../../coin.png')} alt='a coin' className='character-price'/> {selectedCharacter.price}</div>
             <button onClick={handleClick}  className='character-info-buy'>Buy</button>
           </div>
         </div>

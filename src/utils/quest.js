@@ -1,17 +1,15 @@
-const baseUrl = `${process.env.REACT_APP_SERVER_URL}/tasks`;
+const baseUrl = `${process.env.REACT_APP_SERVER_URL}/quest`;
 
-export async function questList(userId) {
-    const apiUrl = `${baseUrl}/tasks/${userId}`;
+export async function questList() {
+    const apiUrl = `${baseUrl}`;
 
     const response = await fetch(apiUrl, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        credentials: "include"
     });
 
     if (response.ok) {
-        const { tasks } = await response.json();
+        const tasks = await response.json();
         return tasks;
     } else {
         const { message } = await response.json();
@@ -19,14 +17,12 @@ export async function questList(userId) {
     }
 }
 
-export async function questComplete(userId, taskId) {
-    const apiUrl = `${baseUrl}/completetask/${userId}/${taskId}`;
+export async function questComplete(taskId) {
+    const apiUrl = `${baseUrl}/complete/${taskId}`;
 
     const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
+        method: 'PATCH',
+        credentials: "include"
     });
 
     if (!response.ok) {
@@ -34,14 +30,12 @@ export async function questComplete(userId, taskId) {
     }
 }
 
-export async function questDelete(userId, taskId) {
-    const apiUrl = `${baseUrl}/${userId}/${taskId}`;
+export async function questDelete(taskId) {
+    const apiUrl = `${baseUrl}/${taskId}`;
 
     const response = await fetch(apiUrl, {
         method: 'DELETE',
-        headers: {
-        'Content-Type': 'application/json',
-        },
+        credentials: "include"
     });
 
     if (!response.ok) {
@@ -50,11 +44,12 @@ export async function questDelete(userId, taskId) {
     }
 }
 
-export async function questCreate(userId, newTask) {
-    const apiUrl = `${baseUrl}/addtask/${userId}`;
+export async function questCreate(newTask) {
+    const apiUrl = `${baseUrl}`;
 
     const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: "include",
         headers: {
         'Content-Type': 'application/json',
         },

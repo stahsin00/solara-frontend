@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import QuestTask from './QuestTask';
-import { useUser } from '../context/UserContext';
-import { questList } from '../utils/quest';
+import { useUser } from '../../context/UserContext';
+import { questList } from '../../utils/quest';
+import './QuestTaskList.css';
 
 function QuestTaskList(props) {
-  const { userId, tasks, setTasks, tasksChanged, selectedTab } = useUser();
+  const { tasks, setTasks, tasksChanged, selectedTab } = useUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -12,7 +13,8 @@ function QuestTaskList(props) {
     setLoading(true);
 
     try {
-      const result = await questList(userId);
+      const result = await questList();
+      console.log(result);
       setTasks(result);
       setError(null);
     } catch (e) {

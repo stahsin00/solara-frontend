@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useUser } from '../context/UserContext';
-import { questComplete } from '../utils/quest';
+import { useUser } from '../../context/UserContext';
+import { questComplete } from '../../utils/quest';
+import './QuestTask.css';
 
 function QuestTask(props) {
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { userId, tasksChanged, setTasksChanged } = useUser();
+  const { tasksChanged, setTasksChanged } = useUser();
 
   async function handleChange(e) {
     e.stopPropagation()
@@ -18,7 +19,7 @@ function QuestTask(props) {
     setIsChecked(true);
 
     try {
-      await questComplete(userId, props.task._id);
+      await questComplete(props.task._id);
       setIsChecked(false);
       setTasksChanged(!tasksChanged);
     } catch (error) {

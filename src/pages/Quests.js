@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import QuestTaskList from '../components/QuestTaskList';
-import QuestFocus from '../components/QuestFocus';
-import QuestCreateTask from '../components/QuestCreateTask';
+import QuestTaskList from '../components/quests/QuestTaskList';
+import QuestFocus from '../components/quests/QuestFocus';
+import QuestCreateTask from '../components/quests/QuestCreateTask';
 import NavSub from '../components/NavSub';
 import { useUser } from '../context/UserContext';
+import './Quests.css';
 
 function Quests() {
   const [selectedTask, setSelectedTask] = useState();

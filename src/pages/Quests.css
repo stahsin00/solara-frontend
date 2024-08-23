@@ -1,0 +1,17 @@
+.quests {
+    grid-template-columns: 1fr 2fr 2fr;
+  }
+
+.quests>div {
+    box-sizing: border-box;
+    height: 70vh;
+    width: 100%;
+    position: relative;
+  }
+
+#absolute-position-add-quest {
+    position: absolute;
+    top: 0vh;
+    right: 70vh;
+    width: 10vh;
+  }

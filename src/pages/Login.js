@@ -1,74 +1,13 @@
-import React, { useState } from 'react';
-import { useUser } from '../context/UserContext';
-import { userLogin, userRegister } from '../utils/user';
+import React from 'react';
+import { userLogin } from '../utils/user';
+import { FaGoogle } from 'react-icons/fa';
+import './Login.css';
 
 function Login() {
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
-  const [success, setSuccess] = useState();
-  const { setUserId, setUsername, setIsLoggedIn, setSelectedPage } = useUser();
-
-  // authentication from server
   async function handleLogin(e) {
     e.preventDefault();
-
-    if (!loading) {
-      if (!username.trim() || !password.trim()) {
-        return;
-      }
-
-      setLoading(true);
-
-      try {
-        const response = await userLogin(username, password);
-        
-        setError(null);
-        setSuccess(null);
-
-        setUserId(response);
-        setUsername(username);
-
-        setSelectedPage('Quests');
-
-        setIsLoggedIn(true);
-
-      } catch (e) {
-        setError(e.message);
-        setSuccess(null);
-      } finally {
-        setUserName("");
-        setPassword("");
-        setLoading(false);
-      }
-    }
-  }
-
-  // attempts registration
-  async function handleRegister(e) {
-    e.preventDefault();
-
-    if (!loading) {
-      if (!username.trim() || !password.trim()) {
-        return;
-      }
-
-      try {
-        const response = await userRegister(username, password);
-
-        setError(null);
-        setSuccess(response);
-
-      } catch (e) {
-        setError(e.message);
-        setSuccess(null);
-      } finally {
-        setUserName("");
-        setPassword("");
-        setLoading(false);
-      }
-    }
+    console.log("logging in");
+    userLogin();
   }
 
   return (
@@ -77,30 +16,12 @@ function Login() {
         <img src={require('../white-sun.png')} alt='logo of a sun' />
         <h1 className="login-title">Solara</h1>
       </div>
-      <input
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUserName(e.target.value)}
-        className='primary-input'
-        required
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className='primary-input'
-        required
-      />
-      <button onClick={handleLogin} className='button-type-medium'>Login</button>
-      <button onClick={handleRegister} className='button-type-medium'>Sign Up</button>
-      {error ? (<div className='error-message'>{error}</div>) 
-              : 
-              (success ? (<div className='success-message'>{success}</div>) 
-                        : 
-                        <></>)}
+      <button onClick={handleLogin} className='button-type-medium'>
+        <div className='login-logo'>
+          <FaGoogle className="button-icon" />
+          Login with Google
+        </div>
+      </button>
     </div>
   );
 }

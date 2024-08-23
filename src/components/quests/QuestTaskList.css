@@ -1,0 +1,4 @@
+.quest-list {
+    max-height: 55vh;
+    overflow: auto;
+  }
