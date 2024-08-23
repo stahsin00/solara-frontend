@@ -9,7 +9,7 @@ function CharacterInfo(props) {
 
   async function handleClick() {
       try {
-        await characterBuy(selectedCharacter._id);
+        await characterBuy(selectedCharacter.id);
         setTasksChanged(!tasksChanged);
         setSelectedCharacter(null);
       } catch (e) {
@@ -24,8 +24,8 @@ function CharacterInfo(props) {
           <hr />
           <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.description}</div>
           <div className='stats'>
-              <div>Base Atk: {selectedCharacter.atk}</div>
-              <div>Base Spe: {selectedCharacter.spe}</div>
+              <div>Base Atk: {selectedCharacter.baseAttackStat}</div>
+              <div>Base Spe: {selectedCharacter.baseSpeedStat}</div>
           </div>
           <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
           <div className='purchase-details'>
@@ -33,7 +33,7 @@ function CharacterInfo(props) {
             <button onClick={handleClick}  className='character-info-buy'>Buy</button>
           </div>
         </div>
-        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.art}`} alt='a character'></img></div>
+        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.fullArt}`} alt='a character'></img></div>
     </div>
   );
 }

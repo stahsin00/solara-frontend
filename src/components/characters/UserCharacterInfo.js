@@ -19,11 +19,11 @@ function UserCharacterInfo(props) {
     async function setUpInfo() {
       setLoading(true);
       try {
-        const result = await userCharacterInfo(selectedCharacter._id);
-        setLevel(result.character.level);
-        setExp(result.character.exp);
-        setMaxExp(result.character.maxExp);
-        setTeam(result.character.team);
+        const result = await userCharacterInfo(selectedCharacter.character.id);
+        setLevel(result.level);
+        setExp(result.experience);
+        setMaxExp(100);
+        setTeam(result.team);
       } catch (e) {
         console.error(e.message);
       } finally {
@@ -35,14 +35,15 @@ function UserCharacterInfo(props) {
       if (loading) return;
       setLoading(true);
         try {
-          await characterLevel(selectedCharacter._id);
+          await characterLevel(selectedCharacter.character.id);
 
           setTasksChanged(!tasksChanged);
 
-          const result = await userCharacterInfo(selectedCharacter._id);
-          setLevel(result.character.level);
-          setExp(result.character.exp);
-          setMaxExp(result.character.maxExp);
+          const result = await userCharacterInfo(selectedCharacter.character.id);
+          console.log(result);
+          setLevel(result.level);
+          setExp(result.experience);
+          setMaxExp(100);
         } catch (e) {
           console.error(e.message);
         } finally {
@@ -62,12 +63,12 @@ function UserCharacterInfo(props) {
       if (loading) return;
       setLoading(true);
         try {
-          await characterAddTeam(selectedCharacter._id);
+          await characterAddTeam(selectedCharacter.character.id, 1);
 
           setTasksChanged(!tasksChanged);
 
-          const result = await userCharacterInfo(selectedCharacter._id);
-          setTeam(result.character.team);
+          const result = await userCharacterInfo(selectedCharacter.character.id);
+          setTeam(result.team);
         } catch (e) {
           console.error(e.message);
         } finally {
@@ -79,12 +80,12 @@ function UserCharacterInfo(props) {
       if (loading) return;
       setLoading(true);
       try {
-        await characterRemoveTeam(selectedCharacter._id);
+        await characterRemoveTeam(1);
 
         setTasksChanged(!tasksChanged);
 
-        const result = await userCharacterInfo(selectedCharacter._id);
-        setTeam(result.character.team);
+        const result = await userCharacterInfo(selectedCharacter.character.id);
+        setTeam(result.team);
       } catch (e) {
         console.error(e.message);
       } finally {
@@ -97,13 +98,13 @@ function UserCharacterInfo(props) {
     {loading ? (<div>loading</div>) :
     (<div className="character-info">
         <div className='character-info-details'>
-          <h2 className='character-info-name'>{selectedCharacter.name}</h2>
+          <h2 className='character-info-name'>{selectedCharacter.character.name}</h2>
           <button onClick={handleClick} id='character-add-to-team'>{loading ? '.' : (team ? '-' : '+')}</button>
           <hr />
-          <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.description}</div>
+          <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.character.description}</div>
           <div className='stats'>
-              <div>Atk: {selectedCharacter.atk}</div>
-              <div>Spe: {selectedCharacter.spe}</div>
+              <div>Atk: {selectedCharacter.attackStat}</div>
+              <div>Spe: {selectedCharacter.speedStat}</div>
           </div>
           <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
           <div className='purchase-details'>
@@ -113,7 +114,7 @@ function UserCharacterInfo(props) {
             <button onClick={handleLevel}  className='character-info-buy'>Level</button>
           </div>
         </div>
-        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.art}`} alt='a character'></img></div>
+        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.character.fullArt}`} alt='a character'></img></div>
     </div>)
     }
     </>

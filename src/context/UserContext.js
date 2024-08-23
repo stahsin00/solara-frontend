@@ -28,7 +28,7 @@ export function UserProvider(props) {
           
         };
         run();
-      }, []);
+      }, [tasksChanged]);
 
     const logout = async () => {
         await userLogout();

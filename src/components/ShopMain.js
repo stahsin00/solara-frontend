@@ -17,7 +17,7 @@ function ShopMain() {
 
     try {
       const result = await characterList();
-      setCharacters(result.characters)
+      setCharacters(result)
     } catch (e) {
       console.error(e.message);
     } finally {
