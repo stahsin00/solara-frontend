@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useUser } from '../context/UserContext';
-import { questComplete } from '../utils/quest';
+import { useUser } from '../../context/UserContext';
+import { questComplete } from '../../utils/quest';
+import './QuestTask.css';
 
 function QuestTask(props) {
   const [isChecked, setIsChecked] = useState(false);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useUser } from "../context/UserContext";
-import { questCreate } from "../utils/quest";
+import { useUser } from "../../context/UserContext";
+import { questCreate } from "../../utils/quest";
+import './QuestCreateTask.css';
 
 function QuestCreateTask(props) {
     const [name, setName] = useState("");       

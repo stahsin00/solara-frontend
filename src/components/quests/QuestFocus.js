@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { useUser } from '../context/UserContext';
-import { questDelete } from '../utils/quest';
+import { useUser } from '../../context/UserContext';
+import { questDelete } from '../../utils/quest';
+import './QuestFocus.css';
 
 function QuestFocus(props) {
   const { userId, setCurrentTask, tasksChanged, setTasksChanged } = useUser();

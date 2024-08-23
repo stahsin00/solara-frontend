@@ -4,6 +4,7 @@ import QuestFocus from '../components/QuestFocus';
 import QuestCreateTask from '../components/QuestCreateTask';
 import NavSub from '../components/NavSub';
 import { useUser } from '../context/UserContext';
+import './Quests.css';
 
 function Quests() {
   const [selectedTask, setSelectedTask] = useState();

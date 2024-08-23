@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext';
 import { userInfo } from '../utils/user';
+import './Header.css';
 
 function Header() {
   const { userId, username, tasksChanged } = useUser();

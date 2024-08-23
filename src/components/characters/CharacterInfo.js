@@ -1,6 +1,7 @@
 import React from 'react';
-import { useUser } from '../context/UserContext';
-import { characterBuy } from '../utils/character';
+import { useUser } from '../../context/UserContext';
+import { characterBuy } from '../../utils/character';
+import './CharacterInfo.css';
 
 function CharacterInfo(props) {
   const { userId, tasksChanged, setTasksChanged } = useUser();

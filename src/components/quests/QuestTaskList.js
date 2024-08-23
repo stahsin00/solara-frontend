@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import QuestTask from './QuestTask';
-import { useUser } from '../context/UserContext';
-import { questList } from '../utils/quest';
+import { useUser } from '../../context/UserContext';
+import { questList } from '../../utils/quest';
+import './QuestTaskList.css';
 
 function QuestTaskList(props) {
   const { userId, tasks, setTasks, tasksChanged, selectedTab } = useUser();

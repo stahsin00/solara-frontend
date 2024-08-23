@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '../context/UserContext';
 import { worldInfo, worldStart, worldStop } from '../utils/world';
 import { formatDoubleDigit } from '../utils/utils';
+import './World.css';
 
 function World() {
   const { userId, currentTask, setCurrentTask } = useUser();

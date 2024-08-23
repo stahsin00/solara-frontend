@@ -1,0 +1,12 @@
+nav {
+    position: absolute;
+    top: 9vh;
+    display: flex;
+    flex-direction: row;
+  }
+  
+.logout-button {
+    position: absolute;
+    right: 1vh;
+    top: 9vh;
+  }

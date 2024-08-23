@@ -1,0 +1,13 @@
+.character-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #2E2E2E;
+  }
+  
+.character-card div {
+    background-color: black;
+  }
+
+.character-card div {
+    text-align: center;
+  }
