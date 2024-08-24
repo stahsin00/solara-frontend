@@ -38,21 +38,21 @@
     width: 10vh;
   }
 
-.difficulty-text-easy {
+.difficulty-text-Easy {
     position: absolute;
     right: 4vh;
     top: 5vh;
     color: #7FB672;
   }
   
-.difficulty-text-medium {
+.difficulty-text-Medium {
     position: absolute;
     right: 4vh;
     top: 5vh;
     color: #EACC61;
   }
   
-.difficulty-text-hard {
+.difficulty-text-Hard {
     position: absolute;
     right: 4vh;
     top: 5vh;

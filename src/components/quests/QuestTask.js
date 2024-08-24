@@ -8,6 +8,23 @@ function QuestTask(props) {
   const [loading, setLoading] = useState(false);
   const { tasksChanged, setTasksChanged } = useUser();
 
+  let difficulty;
+
+  switch (props.task.difficulty) {
+    case 1:
+      difficulty = "easy";
+      break;
+    case 2:
+      difficulty = "medium";
+      break;
+    case 3:
+      difficulty = "hard";
+      break;
+    default:
+      difficulty = "unspecified";
+      break
+  }
+
   async function handleChange(e) {
     e.stopPropagation()
     console.log("click");
@@ -19,7 +36,7 @@ function QuestTask(props) {
     setIsChecked(true);
 
     try {
-      await questComplete(props.task._id);
+      await questComplete(props.task.id);
       setIsChecked(false);
       setTasksChanged(!tasksChanged);
     } catch (error) {
@@ -32,8 +49,8 @@ function QuestTask(props) {
 
   return (
     <div className="QuestName" onClick={() => props.setSelectedTask(props.task)}>
-        <div className={`${props.task.difficulty}-difficulty`}></div>
-        <div className='quest-title'>{props.task.taskName}</div>
+        <div className={`${difficulty}-difficulty`}></div>
+        <div className='quest-title'>{props.task.name}</div>
         <input type="checkbox" checked={isChecked} onChange={handleChange}/>
     </div>
   );

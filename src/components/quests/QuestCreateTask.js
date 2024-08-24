@@ -8,7 +8,7 @@ function QuestCreateTask(props) {
     const [description, setDescription] = useState(""); 
     const [type, setType] = useState("Regular");
     const [tags, setTags] = useState("");               
-    const [difficulty, setDifficulty] = useState("");   
+    const [difficulty, setDifficulty] = useState("Unspecified");   
     const [priority, setPriority] = useState("");   
     const [error, setError] = useState();
     const [success, setSuccess] = useState();
@@ -25,13 +25,9 @@ function QuestCreateTask(props) {
 
         const time = 20;
         const newTask = {
-            taskName: name,
+            name,
             description,
-            type,
-            tags,
-            difficulty,
-            priority,
-            time
+            difficulty
         };
 
         try {
@@ -128,8 +124,8 @@ function QuestCreateTask(props) {
                         <input
                             type="radio"
                             name="difficulty"
-                            value="easy"
-                            checked={difficulty === "easy"}
+                            value="Easy"
+                            checked={difficulty === "Easy"}
                             onChange={handleChange}
                         />
                         Easy
@@ -138,8 +134,8 @@ function QuestCreateTask(props) {
                         <input
                             type="radio"
                             name="difficulty"
-                            value="medium"
-                            checked={difficulty === "medium"}
+                            value="Medium"
+                            checked={difficulty === "Medium"}
                             onChange={handleChange}
                         />
                         Medium
@@ -148,8 +144,8 @@ function QuestCreateTask(props) {
                         <input
                             type="radio"
                             name="difficulty"
-                            value="hard"
-                            checked={difficulty === "hard"}
+                            value="Hard"
+                            checked={difficulty === "Hard"}
                             onChange={handleChange}
                         />
                         Hard
