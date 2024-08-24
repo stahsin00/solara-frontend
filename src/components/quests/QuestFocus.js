@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useUser } from '../../context/UserContext';
 import { questDelete } from '../../utils/quest';
 import './QuestFocus.css';
@@ -8,15 +8,34 @@ function QuestFocus(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
 
-  let taskName = "No Task Selected";
-  let description = "Please Select a Task.";
-  let difficulty = "";
+  const [taskName, setTaskName] = useState("No Task Selected");
+  const [description, setDescription] = useState("Please Select a Task.");
+  const [difficulty, setDifficulty] = useState("");
 
-  if (props.selectedTask) {
-    taskName = props.selectedTask.taskName;
-    description = props.selectedTask.description
-    difficulty = props.selectedTask.difficulty
-  }
+  useEffect(() => {
+    if (props.selectedTask) {
+      setTaskName(props.selectedTask.name);
+      setDescription(props.selectedTask.description)
+      switch (props.selectedTask.difficulty) {
+        case 1:
+          setDifficulty("Easy");
+          break;
+        case 2:
+          setDifficulty("Medium");
+          break;
+        case 3:
+          setDifficulty("Hard");
+          break;
+        default:
+          setDifficulty("");
+          break;
+      }
+    } else {
+      setTaskName("No Task Selected");
+      setDescription("Please Select a Task.")
+      setDifficulty("");
+    }
+  }, [props.selectedTask]);
 
   // delete task
   async function handleDelete() {
@@ -24,7 +43,7 @@ function QuestFocus(props) {
       setLoading(true);
 
       try {
-        await questDelete(props.selectedTask._id);
+        await questDelete(props.selectedTask.id);
         setError(null);
         props.setSelectedTask(null);
         setTasksChanged(!tasksChanged);
@@ -38,9 +57,9 @@ function QuestFocus(props) {
 
   // start game world
   function handleClick() {
-    if (props.selectedTask) {
-      setCurrentTask(props.selectedTask);
-    }
+    // if (props.selectedTask) {
+    //   setCurrentTask(props.selectedTask);
+    // }
   }
 
   return (

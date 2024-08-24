@@ -34,7 +34,7 @@ function QuestTaskList(props) {
                       : tasks.map((task) => {
                         return <QuestTask 
                           task={task}
-                          key={task._id}
+                          key={task.id}
                           setSelectedTask={props.setSelectedTask}
                         />
 }));

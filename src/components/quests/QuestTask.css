@@ -67,3 +67,13 @@
     margin: 0;
     padding: 0;
   }
+
+.unspecified-difficulty {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    width: 2rem;
+    background-color: grey;
+    margin: 0;
+    padding: 0;
+  }
