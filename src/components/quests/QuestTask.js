@@ -26,7 +26,7 @@ function QuestTask(props) {
   }
 
   async function handleChange(e) {
-    e.stopPropagation()
+    e.stopPropagation();
     console.log("click");
 
     if (loading) return;
@@ -51,7 +51,7 @@ function QuestTask(props) {
     <div className="QuestName" onClick={() => props.setSelectedTask(props.task)}>
         <div className={`${difficulty}-difficulty`}></div>
         <div className='quest-title'>{props.task.name}</div>
-        <input type="checkbox" checked={isChecked} onChange={handleChange}/>
+        <input type="checkbox" checked={isChecked} onClick={(e) => e.stopPropagation()} onChange={handleChange}/>
     </div>
   );
 }

@@ -19,7 +19,7 @@ function Quests() {
     <>
       <main className="quests">
           <NavSub 
-            buttons={["All","Regular Tasks", "Recurrent Tasks", "Projects"]}
+            buttons={["All","Regular Quests", "Recurrent Quests", "Projects"]}
           />
           <QuestTaskList setSelectedTask={setSelectedTask} />
           <QuestFocus selectedTask={selectedTask} setSelectedTask={setSelectedTask}/>

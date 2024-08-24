@@ -45,7 +45,7 @@ function QuestCreateTask(props) {
             setDescription("");
             setType("");
             setTags("");
-            setDifficulty("");
+            setDifficulty("Unspecified");
             setPriority("");
 
             setLoading(false);
@@ -85,7 +85,7 @@ function QuestCreateTask(props) {
         (<div className="create-task-background">
             <div className="focus create-task">
                 <form onSubmit={handleSubmit}>
-                    <h2> Add Task </h2>
+                    <h2> Create Quest </h2>
                     <hr />
                     <label htmlFor="new-todo-name">Name:</label>
                     <input

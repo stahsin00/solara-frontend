@@ -13,7 +13,7 @@ function Login() {
   return (
     <div className="login">
       <div className='login-logo'>
-        <img src={require('../white-sun.png')} alt='logo of a sun' />
+        <img src={require('../assets/white-sun.png')} alt='logo of a sun' />
         <h1 className="login-title">Solara</h1>
       </div>
       <button onClick={handleLogin} className='button-type-medium'>
