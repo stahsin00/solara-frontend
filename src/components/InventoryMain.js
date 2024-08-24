@@ -23,16 +23,15 @@ function InventoryMain() {
     setLoading(true);
 
     try {
-      const response = (async () => {
-        if (selectedTab === 'Characters' || init) {
-            return await userCharacterList();
-        } else {
-            return await userTeam();
-        }
-      });
+      if (selectedTab === 'Characters' || init) {
+        const result = await userCharacterList();
+        setCharacters(result);
+      } else {
+        const result = await userTeam();
+        const team = [result.teamCharacter1, result.teamCharacter2, result.teamCharacter3, result.teamCharacter4].filter(character => character !== null);
 
-      const result = await response();
-      setCharacters(result)
+        setCharacters(team);
+      }
     } catch (e) {
       console.error(e.message);
     } finally {

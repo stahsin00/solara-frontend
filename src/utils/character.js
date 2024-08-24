@@ -82,7 +82,7 @@ export async function characterAddTeam(characterId, position) {
     const apiUrl = `${baseUrl}/addtoteam/${characterId}`;
 
     const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: 'PATCH',
         credentials: "include",
         headers: {
             'Content-Type': 'application/json',

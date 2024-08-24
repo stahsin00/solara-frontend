@@ -23,7 +23,7 @@ function UserCharacterInfo(props) {
         setLevel(result.level);
         setExp(result.experience);
         setMaxExp(100);
-        setTeam(result.team);
+        setTeam(result.teamPos > 0 && result.teamPos <= 4);
       } catch (e) {
         console.error(e.message);
       } finally {
@@ -68,7 +68,7 @@ function UserCharacterInfo(props) {
           setTasksChanged(!tasksChanged);
 
           const result = await userCharacterInfo(selectedCharacter.character.id);
-          setTeam(result.team);
+          setTeam(result.teamPos > 0 && result.teamPos <= 4);
         } catch (e) {
           console.error(e.message);
         } finally {
@@ -85,7 +85,7 @@ function UserCharacterInfo(props) {
         setTasksChanged(!tasksChanged);
 
         const result = await userCharacterInfo(selectedCharacter.character.id);
-        setTeam(result.team);
+        setTeam(result.teamPos > 0 && result.teamPos <= 4);
       } catch (e) {
         console.error(e.message);
       } finally {
