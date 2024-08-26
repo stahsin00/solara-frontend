@@ -1,11 +1,3 @@
-.slime {
-    width: 30vh;
-    position: absolute;
-    left: 50%;
-    top: 40vh;
-    transform: translateX(-50%);
-  }
-  
 .world h2 {
     position: absolute;
     left: 50%;
@@ -35,93 +27,7 @@
     color: white;
   }
   
-.battle-stop {
-    position: absolute;
-    left: 50%;
-    top: 85vh;
-    transform: translateX(-50%);
-  }
-  
-.timer {
-    font-size: 10vh;
-    background-color: black;
-    padding: 2vh;
-    border-radius: 10px;
-    position: absolute;
-    left: 50%;
-    top: 65vh;
-    transform: translateX(-50%);
-    z-index: 1;
-  }
-  
 .current-location {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 5px;
   }
-  
-#health-bar {
-    background-color: grey;
-    width: 20vh;
-    height: 2vh;
-    border-radius: 10px;
-    position: absolute;
-    left: 50%;
-    top: 42vh;
-    transform: translateX(-50%);
-    z-index: 1;
-    box-sizing: content-box;
-    display: flex;
-    align-items: center;
-  }
-  
-#health {
-    background-color: red;
-    width: 20%;
-    height: 100%;
-    border-radius: 10px;
-  }
-
-.set-timer {
-    background-color: black;
-    border-radius: 10px;
-    height: 30vh;
-    width: 70vh;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-.set-timer-buttons {
-    display: inline-block;
-    white-space: nowrap;
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    transform: translateX(-50%);
-  }
-
-.set-timer input {
-    background-color: #d9d9d9;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 20px;
-    width: 75%;
-    font: inherit;
-    color: black;
-    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5);
-  }
-  
-.set-timer img {
-    width: 2.5vh;
-    vertical-align: middle;
-  }
-  
-.rewards-earned-so-far {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  

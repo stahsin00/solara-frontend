@@ -57,9 +57,9 @@ function QuestFocus(props) {
 
   // start game world
   function handleClick() {
-    // if (props.selectedTask) {
-    //   setCurrentTask(props.selectedTask);
-    // }
+    if (props.selectedTask) {
+      setCurrentTask(props.selectedTask);
+    }
   }
 
   return (
