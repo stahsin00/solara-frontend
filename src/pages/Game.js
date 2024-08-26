@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SetTimer from '../components/game/SetTimer';
 import Battle from '../components/game/Battle';
-import './World.css';
+import './Game.css';
 
-function World() {
+function Game() {
   const [isBattling, setIsBattling] = useState(false);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -61,4 +61,4 @@ function World() {
   );
 }
 
-export default World;
+export default Game;

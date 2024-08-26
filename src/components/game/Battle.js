@@ -1,9 +1,12 @@
 import { useUser } from '../../context/UserContext';
+import useWebSocket from '../../hooks/useWebSocket';
 import { formatDoubleDigit } from '../../utils/utils';
 import './Battle.css';
 
 function Battle(props) {
     const { currentTask } = useUser();
+    console.log(currentTask);
+    const { messages, isConnected } = useWebSocket(`${process.env.REACT_APP_SERVER_URL}/game/${currentTask.id}`);
 
     return (
         <div className='battle'>

@@ -13,7 +13,7 @@ import Quests from './pages/Quests';
 import Inventory from './pages/Inventory';
 import Shop from './pages/Shop';
 import Tutorial from './pages/Tutorial';
-import World from './pages/World';
+import Game from './pages/Game';
 
 
 
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      {!user ? (<Login />) : (currentTask ? (<World />) :
+      {!user ? (<Login />) : (currentTask ? (<Game />) :
       (<div className="App">
         <Header />
         <Nav />
