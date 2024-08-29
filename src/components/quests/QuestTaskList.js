@@ -14,7 +14,6 @@ function QuestTaskList(props) {
 
     try {
       const result = await questList();
-      console.log(result);
       setTasks(result);
       setError(null);
     } catch (e) {

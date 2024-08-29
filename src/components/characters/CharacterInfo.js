@@ -29,7 +29,7 @@ function CharacterInfo(props) {
           </div>
           <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
           <div className='purchase-details'>
-            <div><img src={require('../../coin.png')} alt='a coin' className='character-price'/> {selectedCharacter.price}</div>
+            <div><img src={require('../../assets/coin.png')} alt='a coin' className='character-price'/> {selectedCharacter.price}</div>
             <button onClick={handleClick}  className='character-info-buy'>Buy</button>
           </div>
         </div>

@@ -1,0 +1,36 @@
+.slime {
+    width: 30vh;
+    position: absolute;
+    left: 50%;
+    top: 40vh;
+    transform: translateX(-50%);
+  }
+
+.battle-stop {
+    position: absolute;
+    left: 50%;
+    top: 85vh;
+    transform: translateX(-50%);
+  }
+
+#health-bar {
+    background-color: grey;
+    width: 20vh;
+    height: 2vh;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 42vh;
+    transform: translateX(-50%);
+    z-index: 1;
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+  }
+  
+#health {
+    background-color: red;
+    width: 20%;
+    height: 100%;
+    border-radius: 10px;
+  }

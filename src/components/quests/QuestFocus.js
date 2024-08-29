@@ -8,8 +8,8 @@ function QuestFocus(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
 
-  const [taskName, setTaskName] = useState("No Task Selected");
-  const [description, setDescription] = useState("Please Select a Task.");
+  const [taskName, setTaskName] = useState("No Quest Selected");
+  const [description, setDescription] = useState("Please Select a Quest.");
   const [difficulty, setDifficulty] = useState("");
 
   useEffect(() => {
@@ -31,8 +31,8 @@ function QuestFocus(props) {
           break;
       }
     } else {
-      setTaskName("No Task Selected");
-      setDescription("Please Select a Task.")
+      setTaskName("No Quest Selected");
+      setDescription("Please Select a Quest.")
       setDifficulty("");
     }
   }, [props.selectedTask]);
@@ -57,9 +57,9 @@ function QuestFocus(props) {
 
   // start game world
   function handleClick() {
-    // if (props.selectedTask) {
-    //   setCurrentTask(props.selectedTask);
-    // }
+    if (props.selectedTask) {
+      setCurrentTask(props.selectedTask);
+    }
   }
 
   return (
