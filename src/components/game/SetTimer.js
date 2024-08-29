@@ -17,8 +17,8 @@ function SetTimer(props) {
     return (
         <div className='set-timer'>
             <form>
-              <input type='number' name='hours' min='0' max='24' value={hours} onChange={(e) => setHours(e.target.value)}/> Hours
-              <input type='number' name='minutes' min='0' max='59' value={minutes} onChange={(e) => setMinutes(e.target.value)}/> Minutes
+              <input type='number' name='hours' min='0' max='24' value={hours} onChange={(e) => setHours(Number(e.target.value))}/> Hours
+              <input type='number' name='minutes' min='0' max='59' value={minutes} onChange={(e) => setMinutes(Number(e.target.value))}/> Minutes
             </form>
             <div className='rewards-earned-so-far'>{0}<img src={require('../../assets/coin.png')} alt='a coin' /> earned so far.</div>
             <div className='set-timer-buttons'>
