@@ -1,9 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
+// TODO
 const useWebSocket = (url) => {
   const socket = useRef(null);
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
+
+  const closeConnection = useCallback(() => {  // TODO: look into useCallback and memoization 
+    if (socket.current) {
+      socket.current.close();
+      setIsConnected(false);
+      console.log('WebSocket connection closed manually.');
+    }
+  }, []);
 
   useEffect(() => {
     socket.current = new WebSocket(url);
@@ -29,11 +38,11 @@ const useWebSocket = (url) => {
     };
 
     return () => {
-      socket.current?.close();
+      closeConnection();
     };
-  }, [url]);
+  }, [url, closeConnection]);
 
-  return { messages, isConnected };
+  return { messages, isConnected, closeConnection };
 };
 
 export default useWebSocket;

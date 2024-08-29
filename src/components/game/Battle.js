@@ -5,18 +5,30 @@ import './Battle.css';
 
 function Battle(props) {
     const { currentTask } = useUser();
-    console.log(currentTask);
-    const { messages, isConnected } = useWebSocket(`${process.env.REACT_APP_SERVER_URL}/game/${currentTask.id}`);
+    const { messages, isConnected, closeConnection } = useWebSocket(`${process.env.REACT_APP_SERVER_URL}/game/${props.game.id}`);
+
+    const handleStop = () => {
+        closeConnection();
+        props.handleStop();
+    }
 
     return (
         <div className='battle'>
-            <h2>{currentTask.taskName}</h2>
-            <div id='health-bar'>
-                <div id='health' style={{ width: "100" }}></div>
-            </div>
-            <img src={require('../../assets/slime.gif')} alt='animation of a slime being attacked' className='slime'></img>
-            <div className='timer'>{formatDoubleDigit(props.hours)}:{formatDoubleDigit(props.minutes)}:{formatDoubleDigit(props.seconds)}</div>
-            <button onClick={props.handleStop} className='battle-stop'>Stop</button>
+            { isConnected ?
+                (<>
+                    <h2>{currentTask.name}</h2>
+                    <img src={require('../../assets/slime.gif')} alt='animation of a slime being attacked' className='slime'></img>
+                    <div className='timer'>{formatDoubleDigit(0)}:{formatDoubleDigit(0)}:{formatDoubleDigit(0)}</div>
+                    <button onClick={handleStop} className='battle-stop'>Stop</button>
+                </>)
+                :
+                (
+                    <div>
+                        <div>Not Connected to Server.</div>
+                        <button onClick={props.handleStop} className='battle-stop'>Stop</button>
+                    </div>
+                )
+            }
         </div>
     );
 }
