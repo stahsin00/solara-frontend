@@ -5,7 +5,7 @@ import './Battle.css';
 
 function Battle(props) {
     const { currentTask } = useUser();
-    const { messages, isConnected, closeConnection } = useWebSocket(`${process.env.REACT_APP_SERVER_URL}/game/${props.game.id}`);
+    const { messages, isConnected, closeConnection } = useWebSocket(`${process.env.REACT_APP_SERVER_URL}/game`);
 
     const handleStop = () => {
         closeConnection();

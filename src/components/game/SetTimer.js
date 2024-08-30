@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './SetTimer.css';
 import { useUser } from '../../context/UserContext';
-import { gameCreate } from '../../utils/game';
+import { gameCreate, gameDelete } from '../../utils/game';
 
 function SetTimer(props) {
     const { currentTask, setCurrentTask } = useUser();
@@ -14,6 +14,13 @@ function SetTimer(props) {
       props.handleStart();
     }
 
+    const handleBack = async () => {
+      if (props.game) {
+        await gameDelete();
+      }
+      setCurrentTask(null);
+    }
+
     return (
         <div className='set-timer'>
             <form>
@@ -23,7 +30,7 @@ function SetTimer(props) {
             <div className='rewards-earned-so-far'>{0}<img src={require('../../assets/coin.png')} alt='a coin' /> earned so far.</div>
             <div className='set-timer-buttons'>
               <button onClick={handleStart} className='set-timer-start'>Start</button>
-              <button onClick={() => setCurrentTask(null)} className='set-timer-cancel'>Back</button>
+              <button onClick={handleBack} className='set-timer-cancel'>Back</button>
             </div>
         </div>
     );

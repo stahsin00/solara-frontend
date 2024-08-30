@@ -3,13 +3,18 @@ import CharacterCard from './CharacterCard';
 import CharacterInfo from './CharacterInfo';
 import UserCharacterInfo from './UserCharacterInfo';
 import './CharacterList.css';
+import Spinner from './../Spinner';
 
 function CharacterList(props) {
     const { shop, characters, isLoading } = props;
     const [selectedCharacter, setSelectedCharacter] = useState();
 
     if (isLoading) {
-        return <div>loading</div>
+        return (
+            <div className='loading-div'>
+                <Spinner loading={true} size={'5rem'} color={'black'}/>
+            </div>
+        )
       }
   
     if (!characters || characters.length === 0) {

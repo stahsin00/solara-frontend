@@ -8,8 +8,8 @@ function QuestFocus(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
 
-  const [taskName, setTaskName] = useState("No Quest Selected");
-  const [description, setDescription] = useState("Please Select a Quest.");
+  const [taskName, setTaskName] = useState("No Quests.");
+  const [description, setDescription] = useState("");
   const [difficulty, setDifficulty] = useState("");
 
   useEffect(() => {
@@ -31,8 +31,8 @@ function QuestFocus(props) {
           break;
       }
     } else {
-      setTaskName("No Quest Selected");
-      setDescription("Please Select a Quest.")
+      setTaskName("No Quests.");
+      setDescription("")
       setDifficulty("");
     }
   }, [props.selectedTask]);

@@ -40,8 +40,12 @@ function InventoryMain() {
   }
 
   return (
-    <div className="shop-main">
-        <CharacterList shop={false} isLoading={init ? init : loading} characters={characters}/>
+    <div className="main-container">
+      {
+          (selectedTab != 'Equipment') ?
+          (<CharacterList shop={false} isLoading={init ? init : loading} characters={characters}/>) :
+          (<div className='coming-soon'>Coming soon.</div>)
+      }
     </div>
   );
 }
