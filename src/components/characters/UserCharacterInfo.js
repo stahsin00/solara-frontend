@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 import { characterAddTeam, characterLevel, characterRemoveTeam, userCharacterInfo } from '../../utils/character';
 import './CharacterInfo.css';
+import Spinner from '../Spinner';
 
 function UserCharacterInfo(props) {
   const { tasksChanged, setTasksChanged } = useUser();
@@ -11,13 +12,20 @@ function UserCharacterInfo(props) {
     const [exp, setExp] = useState(0);
     const [maxExp, setMaxExp] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [getting, setGetting] = useState(false);
+    const [leveling, setLeveling] = useState(false);
+    const [adding, setAdding] = useState(false);
 
     useEffect(() => {
       setUpInfo();
     }, []);
 
+    useEffect(() => {
+      setLoading(leveling || adding || getting);
+    }, [leveling, adding, getting])
+
     async function setUpInfo() {
-      setLoading(true);
+      setGetting(true);
       try {
         const result = await userCharacterInfo(selectedCharacter.character.id);
         setLevel(result.level);
@@ -27,13 +35,13 @@ function UserCharacterInfo(props) {
       } catch (e) {
         console.error(e.message);
       } finally {
-        setLoading(false);
+        setGetting(false);
       }
     }
 
     async function handleLevel() {
       if (loading) return;
-      setLoading(true);
+      setLeveling(true);
         try {
           await characterLevel(selectedCharacter.character.id);
 
@@ -47,21 +55,22 @@ function UserCharacterInfo(props) {
         } catch (e) {
           console.error(e.message);
         } finally {
-          setLoading(false);
+          setLeveling(false);
         }
     }
 
-    function handleClick() {
+    async function handleClick() {
+      if (loading) return;
+      setAdding(true);
       if (team) {
-        RemoveFromTeam();
+        await RemoveFromTeam();
       } else {
-        addToTeam();
+        await addToTeam();
       }
+      setAdding(false);
     }
 
     async function addToTeam() {
-      if (loading) return;
-      setLoading(true);
         try {
           await characterAddTeam(selectedCharacter.character.id, 1);
 
@@ -71,14 +80,10 @@ function UserCharacterInfo(props) {
           setTeam(result.teamPos > 0 && result.teamPos <= 4);
         } catch (e) {
           console.error(e.message);
-        } finally {
-          setLoading(false);
         }
     }
 
     async function RemoveFromTeam() {
-      if (loading) return;
-      setLoading(true);
       try {
         await characterRemoveTeam(1);
 
@@ -88,35 +93,53 @@ function UserCharacterInfo(props) {
         setTeam(result.teamPos > 0 && result.teamPos <= 4);
       } catch (e) {
         console.error(e.message);
-      } finally {
-        setLoading(false);
       }
   }
 
   return (
     <>
-    {loading ? (<div>loading</div>) :
-    (<div className="character-info">
+    <div className="character-info">
         <div className='character-info-details'>
-          <h2 className='character-info-name'>{selectedCharacter.character.name}</h2>
-          <button onClick={handleClick} id='character-add-to-team'>{loading ? '.' : (team ? '-' : '+')}</button>
-          <hr />
-          <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.character.description}</div>
-          <div className='stats'>
-              <div>Atk: {selectedCharacter.attackStat}</div>
-              <div>Spe: {selectedCharacter.speedStat}</div>
-          </div>
-          <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
-          <div className='purchase-details'>
-            <div>Exp: {exp} / {maxExp}</div>
-            <div>  |  </div>
-            <div>Level: {level}</div>
-            <button onClick={handleLevel}  className='character-info-buy'>Level</button>
-          </div>
+          {
+            getting?
+            <div className='centered-spinner'><Spinner size={'5rem'}/></div>
+            :
+            <>
+              <h2 className='character-info-name'>{selectedCharacter.character.name}</h2>
+              <button onClick={handleClick} id='character-add-to-team'>
+                {
+                adding ? 
+                (<div className='centered-spinner'><Spinner /></div>)
+                : 
+                (team ? '-' : '+')
+                }
+              </button>
+              <hr />
+              <div className='description' style={{ whiteSpace: 'pre-wrap' }}>{selectedCharacter.character.description}</div>
+              <div className='stats'>
+                  <div>Atk: {selectedCharacter.attackStat}</div>
+                  <div>Spe: {selectedCharacter.speedStat}</div>
+              </div>
+              <button onClick={() => {setSelectedCharacter(null)}} className='character-info-back'>Back</button>
+              <div className='purchase-details'>
+                <div>Exp: {exp} / {maxExp}</div>
+                <div>  |  </div>
+                <div>Level: {level}</div>
+                <button onClick={handleLevel}  className='character-info-buy'>
+                  { leveling ?
+                    <div className='centered-spinner'><Spinner /></div>
+                    :
+                    'Level'
+                  }
+                </button>
+              </div>
+            </>
+          }
         </div>
-        <div className='character-info-image'><img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.character.fullArt}`} alt='a character'></img></div>
-    </div>)
-    }
+        <div className='character-info-image'>
+          {getting ? <></> : <img src={`${process.env.REACT_APP_IMAGE_URL}/${selectedCharacter.character.fullArt}`} alt='a character'></img>}
+        </div>
+    </div>
     </>
   );
 }

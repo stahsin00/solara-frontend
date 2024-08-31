@@ -9,6 +9,7 @@ function QuestTask(props) {
   const { tasksChanged, setTasksChanged } = useUser();
 
   let difficulty;
+  let priority;
 
   switch (props.task.difficulty) {
     case 1:
@@ -23,6 +24,21 @@ function QuestTask(props) {
     default:
       difficulty = "unspecified";
       break
+  }
+
+  switch (props.task.priority) {
+    case 1:
+      priority = 'easy';
+      break;
+    case 2:
+      priority = ' medium';
+      break;
+    case 3:
+      priority = 'hard';
+      break;
+    default:
+      priority = 'unspecified';
+      break;
   }
 
   async function handleChange(e) {
@@ -50,6 +66,8 @@ function QuestTask(props) {
   return (
     <div className="QuestName" onClick={() => props.setSelectedTask(props.task)}>
         <div className={`${difficulty}-difficulty`}></div>
+        {//<div className={`${priority}-difficulty priority`}></div> TODO
+        }
         <div className='quest-title'>{props.task.name}</div>
         <input type="checkbox" checked={isChecked} onClick={(e) => e.stopPropagation()} onChange={handleChange}/>
     </div>

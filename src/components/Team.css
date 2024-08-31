@@ -1,0 +1,27 @@
+.team-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    right: 1rem;
+}
+
+.member {
+    background-color: #2E2E2E;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10px;
+}
+
+.member img {
+    width: 100%;
+    height: auto;
+}

@@ -14,6 +14,7 @@ import Inventory from './pages/Inventory';
 import Shop from './pages/Shop';
 import Tutorial from './pages/Tutorial';
 import Game from './pages/Game';
+import Team from './components/Team'
 
 
 
@@ -22,19 +23,25 @@ function App() {
 
   return (
     <>
-      {!user ? (<Login />) : (currentTask ? (<Game />) :
-      (<div className="App">
-        <Header />
-        <Nav />
-        <Link to='/quests'><button className='logout-button button-type-light' onClick={logout}>Logout</button></Link>
-        <Routes>
-          <Route path='/' element={<Quests />} exact/>
-          <Route path='/quests' element={<Quests />} />
-          <Route path='/inventory' element={<Inventory />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/tutorial' element={<Tutorial />} />
-        </Routes>
-      </div>))
+      {
+      !user ? 
+      (<Login />) : 
+      (<><Team />
+        {currentTask ? 
+        (<Game />) :
+        (<div className="App">
+          <Header />
+          <Nav />
+          <Link to='/quests'><button className='logout-button button-type-light' onClick={logout}>Logout</button></Link>
+          <Routes>
+            <Route path='/' element={<Quests />} exact/>
+            <Route path='/quests' element={<Quests />} />
+            <Route path='/inventory' element={<Inventory />} />
+            <Route path='/shop' element={<Shop />} />
+            <Route path='/tutorial' element={<Tutorial />} />
+          </Routes>
+        </div>)}</>
+      )
       }
     </>
   );

@@ -22,3 +22,15 @@ export async function gameCreate(hours, minutes, questId) {
         throw new Error(`Failed to create game: ${response.statusText}`)
     }
 }
+
+export async function gameDelete() {
+    const response = await fetch(baseUrl, {
+        method: 'DELETE',
+        credentials: "include"
+    });
+
+    if (!response.ok) {
+        const {message} = await response.json();
+        throw new Error(message);
+    }
+}

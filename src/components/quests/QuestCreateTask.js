@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useUser } from "../../context/UserContext";
 import { questCreate } from "../../utils/quest";
 import './QuestCreateTask.css';
+import Spinner from "../Spinner";
 
 function QuestCreateTask(props) {
     const [name, setName] = useState("");       
@@ -23,7 +24,6 @@ function QuestCreateTask(props) {
 
         setLoading(true);
 
-        const time = 20;
         const newTask = {
             name,
             description,
@@ -55,6 +55,7 @@ function QuestCreateTask(props) {
     }
 
     function handleChange(e) {
+        if (loading) return;
         const { name, value } = e.target;
         switch (name) {
             case "name":
@@ -78,6 +79,11 @@ function QuestCreateTask(props) {
             default:
                 break;
         }
+    }
+
+    const handleCancel = () => {
+        if (loading) return;
+        props.setIsAdding(false)
     }
 
     return (
@@ -106,89 +112,81 @@ function QuestCreateTask(props) {
                         onChange={handleChange}
                         className="primary-input"
                     />
-                    <div className="difficulty-input">
-                    <label htmlFor="new-todo-type">Type:</label>
-                    <select
-                        id="new-todo-type"
-                        name="type"
-                        value={type}
-                        onChange={handleChange}
-                    >
-                        <option value="Regular">Regular</option>
-                        <option value="Recurrent">Recurrent</option>
-                    </select>
+                    <div className="radio-input">
+                        <label>Difficulty:</label>
+                        <div className="radio-input-options">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="difficulty"
+                                    value="Easy"
+                                    checked={difficulty === "Easy"}
+                                    onChange={handleChange}
+                                />
+                                Easy
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="difficulty"
+                                    value="Medium"
+                                    checked={difficulty === "Medium"}
+                                    onChange={handleChange}
+                                />
+                                Medium
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="difficulty"
+                                    value="Hard"
+                                    checked={difficulty === "Hard"}
+                                    onChange={handleChange}
+                                />
+                                Hard
+                            </label>
+                        </div>
                     </div>
-                    <div className="difficulty-input">
-                    <label>Difficulty:</label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="difficulty"
-                            value="Easy"
-                            checked={difficulty === "Easy"}
-                            onChange={handleChange}
-                        />
-                        Easy
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="difficulty"
-                            value="Medium"
-                            checked={difficulty === "Medium"}
-                            onChange={handleChange}
-                        />
-                        Medium
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="difficulty"
-                            value="Hard"
-                            checked={difficulty === "Hard"}
-                            onChange={handleChange}
-                        />
-                        Hard
-                    </label>
-                    </div>
-                    <div className="difficulty-input">
-                    <label>Priority:</label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="priority"
-                            value="low"
-                            checked={priority === "low"}
-                            onChange={handleChange}
-                        />
-                        Low
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="priority"
-                            value="medium"
-                            checked={priority === "medium"}
-                            onChange={handleChange}
-                        />
-                        Medium
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="priority"
-                            value="high"
-                            checked={priority === "high"}
-                            onChange={handleChange}
-                        />
-                        High
-                    </label>
+                    <div className="radio-input">
+                        <label>Priority:</label>
+                        <div className="radio-input-options">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="priority"
+                                    value="low"
+                                    checked={priority === "low"}
+                                    onChange={handleChange}
+                                />
+                                Low
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="priority"
+                                    value="medium"
+                                    checked={priority === "medium"}
+                                    onChange={handleChange}
+                                />
+                                Medium
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="priority"
+                                    value="high"
+                                    checked={priority === "high"}
+                                    onChange={handleChange}
+                                />
+                                High
+                            </label>
+                        </div>
                     </div>
                     <button type="submit" className="button-type-medium add-button">
-                    Add
+                        {loading ? (<Spinner loading={loading} size={20} />) : 'Add'}
                     </button>
                 </form>
-                <button onClick={() => props.setIsAdding(false)} className="button-type-medium cancel-button">Cancel</button>
+                <button onClick={handleCancel} className="button-type-medium cancel-button">Cancel</button>
             </div>
         </div>)
         :

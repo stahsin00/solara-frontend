@@ -3,6 +3,7 @@ import QuestTask from './QuestTask';
 import { useUser } from '../../context/UserContext';
 import { questList } from '../../utils/quest';
 import './QuestTaskList.css';
+import Spinner from './../Spinner'
 
 function QuestTaskList(props) {
   const { tasks, setTasks, tasksChanged, selectedTab } = useUser();
@@ -11,10 +12,12 @@ function QuestTaskList(props) {
 
   async function fetchTasks() {
     setLoading(true);
+    props.setSelectedTask(null);
 
     try {
       const result = await questList();
       setTasks(result);
+      if (result.length > 0) props.setSelectedTask(result[0]);
       setError(null);
     } catch (e) {
       console.error(e.message);
@@ -40,17 +43,19 @@ function QuestTaskList(props) {
 
   return (
     <div className="quest-tasks">
-        {(selectedTab == "All") ?
+        {(selectedTab == "All" || selectedTab == "Regular Quests") ?
         (<div className='all-quests'>
-          <h2>All</h2>
+          <h2>{selectedTab}</h2>
           <hr />
           <div className='quest-list'>
-            {loading ? (<div>loading...</div>) : taskList}
+            {loading ? (<div className='loading-div'><Spinner size={'5rem'} color={'black'}/></div>) : taskList}
           </div>
         </div>)
         :
         <div>
-          <h2>Coming soon.</h2>
+          <h2>{selectedTab}</h2>
+          <hr/>
+          <div className='coming-soon'>Coming soon.</div>
         </div>
         }
     </div>

@@ -3,7 +3,7 @@
     font: inherit;
     color: black;
     font-weight: bold;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     padding: 5px 10px;
     margin: 5px;
@@ -11,14 +11,15 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
     z-index: 1;
     cursor: pointer;
+    transition: border-color 0.25s;
   }
 
 .button-type-light-selected {
-    background-color: gray;
+    background-color: rgb(187, 187, 187);
     font: inherit;
     color: black;
     font-weight: bold;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     padding: 5px 10px;
     margin: 5px;
@@ -27,12 +28,11 @@
   }
 
 .button-type-light:hover {
-    background-color: rgb(163, 163, 163);
-    color: black;
+    border: 1px solid white;
   }
 
 .button-type-medium {
-    background-color: #6a6a6a;
+    background-color: #4e4e4e;
     font: inherit;
     color: white;
     border: none;
@@ -43,6 +43,7 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
     z-index: 1;
     cursor: pointer;
+    transition: background-color 0.25s, color 0.25s;
   }
 
 .button-type-medium:hover {
@@ -61,6 +62,7 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
     z-index: 1;
     cursor: pointer;
+    transition: background-color 0.25s, color 0.25s;
   }
 
 .button-type-dark-selected {
