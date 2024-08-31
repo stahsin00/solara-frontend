@@ -54,3 +54,6 @@
     transform: translateX(-50%);
   }
   
+.set-timer button {
+  height: 2.5rem;
+}

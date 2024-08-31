@@ -71,3 +71,12 @@ hr {
   margin: 10px auto;
   background-color: rgba(169,186,161,0.15);
 }
+
+.centered-spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

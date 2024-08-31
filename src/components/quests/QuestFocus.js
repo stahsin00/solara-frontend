@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { useUser } from '../../context/UserContext';
 import { questDelete } from '../../utils/quest';
 import './QuestFocus.css';
+import Spinner from '../Spinner';
 
 function QuestFocus(props) {
   const { setCurrentTask, tasksChanged, setTasksChanged } = useUser();
-  const [loading, setLoading] = useState();
+  const [deleting, setDeleting] = useState();
   const [error, setError] = useState();
 
   const [taskName, setTaskName] = useState("No Quests.");
@@ -39,8 +40,8 @@ function QuestFocus(props) {
 
   // delete task
   async function handleDelete() {
-    if (props.selectedTask && !loading) {
-      setLoading(true);
+    if (props.selectedTask && !deleting) {
+      setDeleting(true);
 
       try {
         await questDelete(props.selectedTask.id);
@@ -50,7 +51,7 @@ function QuestFocus(props) {
       } catch (e) {
         setError(e.message);
       } finally {
-        setLoading(false);
+        setDeleting(false);
       }
     }
   }
@@ -74,7 +75,13 @@ function QuestFocus(props) {
             {(!props.selectedTask) ? <></> :
             (<div>
               {error ? (<div className='error-message'>{error}</div>) : <></>}
-              <button className='button-type-light delete-button' onClick={handleDelete}>Delete</button>
+              <button className='button-type-light delete-button' onClick={handleDelete}>
+              { deleting ?
+                  <div className='centered-spinner'><Spinner /></div>
+                  :
+                  'Delete'
+              }
+              </button>
               <button onClick={handleClick} id='start-button'>Start</button>
             </div>)
             }
