@@ -18,3 +18,11 @@
   align-items: center;
   text-align: center;
 }
+
+.add-to-team {
+  background-color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

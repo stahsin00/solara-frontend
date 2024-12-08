@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 
 import { useUser } from './context/UserContext';
@@ -15,11 +15,30 @@ import Shop from './pages/Shop';
 import Tutorial from './pages/Tutorial';
 import Game from './pages/Game';
 import Team from './components/Team'
+import Mobile from './pages/Mobile';
 
 
 
 function App() {
   const { user, currentTask, logout } = useUser();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <Mobile/>
+    )
+  }
 
   return (
     <>

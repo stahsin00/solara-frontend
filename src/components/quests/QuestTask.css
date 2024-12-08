@@ -2,17 +2,19 @@
     height: 100%;
     position: absolute;
     left: 3rem;
-    top: 50%;
-    transform: translateY(-15%);
+    display: flex;
+    align-items: center;
+    width: 20rem;
   }
 
 .QuestName {
     background-color: black;
     height: 5.1rem;
     margin: 0.5rem;
-    display: flex;
     position: relative;
     border: 1px solid black;
+    display: flex;
+    align-items: center;
   }
   
 .QuestName input[type="checkbox"] {

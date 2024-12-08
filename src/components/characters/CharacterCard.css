@@ -1,7 +1,7 @@
 .character-card {
     display: flex;
     flex-direction: column;
-    background-color: #2E2E2E;
+    background-color: black;
     cursor: pointer;
   }
   

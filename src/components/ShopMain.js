@@ -10,6 +10,7 @@ function ShopMain() {
 
   useEffect( () => {
     fetchCharacterList();
+    setSelectedTab('Characters');
   }, []);
 
   async function fetchCharacterList() {

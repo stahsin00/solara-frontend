@@ -1,13 +1,13 @@
 main {
-    background-color: rgba(222, 222, 217, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 1);
     width: 80%;
     height: 70vh;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    top: 7em;
+    top: 50%;
+    transform: translate(-50%, -45%);
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -16,7 +16,7 @@ main {
   }
   
 main h2 {
-    color: black;
+    color: white;
   }
 
 .main-container {

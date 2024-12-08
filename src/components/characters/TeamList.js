@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
 import CharacterInfo from './CharacterInfo';
 import UserCharacterInfo from './UserCharacterInfo';
 import './CharacterList.css';
 import Spinner from './../Spinner';
+import TeamModal from './TeamModal';
 
-function CharacterList(props) {
+function TeamList(props) {
     const { shop, characters, isLoading } = props;
     const [selectedCharacter, setSelectedCharacter] = useState();
-    const [loading, setLoading] = useState(true);
-    console.log(isLoading);
+    const [isOpen, setIsOpen] = useState(false);
     console.log(characters);
 
-    useEffect(() => {
-        setLoading(isLoading);
-      }, [isLoading]);
-
-    if (loading || isLoading) {
+    if (isLoading) {
         return (
             <div className='loading-div'>
                 <Spinner loading={true} size={'5rem'} color={'black'}/>
@@ -29,6 +25,11 @@ function CharacterList(props) {
     }
 
     const characterList = characters.map((character) => (
+        (character == null) ? 
+        <div className='add-to-team' onClick={() => setIsOpen(true)}>
+            ADD
+        </div> 
+        :
         <CharacterCard 
             shop={shop}
             key={character.id} 
@@ -38,10 +39,13 @@ function CharacterList(props) {
     ));
 
     return (
-        <div className="character-list">
-            {(selectedCharacter) ? (shop ? <CharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/> : <UserCharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/>) : characterList}
-        </div>
+        <>
+            <div className="character-list">
+                {(selectedCharacter) ? (shop ? <CharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/> : <UserCharacterInfo selectedCharacter={selectedCharacter} setSelectedCharacter={setSelectedCharacter}/>) : characterList}
+            </div>
+            <TeamModal isOpen={isOpen} setIsOpen={setIsOpen}/>
+        </>
     );
 }
 
-export default CharacterList;
+export default TeamList;
