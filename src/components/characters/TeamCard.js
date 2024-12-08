@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
 import CharacterInfo from './CharacterInfo';
 import UserCharacterInfo from './UserCharacterInfo';
 import './CharacterList.css';
 import Spinner from './../Spinner';
 
-function CharacterList(props) {
+function TeamCard(props) {
     const { shop, characters, isLoading } = props;
     const [selectedCharacter, setSelectedCharacter] = useState();
-    const [loading, setLoading] = useState(true);
-    console.log(isLoading);
-    console.log(characters);
 
-    useEffect(() => {
-        setLoading(isLoading);
-      }, [isLoading]);
-
-    if (loading || isLoading) {
+    if (isLoading) {
         return (
             <div className='loading-div'>
                 <Spinner loading={true} size={'5rem'} color={'black'}/>
@@ -44,4 +37,4 @@ function CharacterList(props) {
     );
 }
 
-export default CharacterList;
+export default TeamCard;

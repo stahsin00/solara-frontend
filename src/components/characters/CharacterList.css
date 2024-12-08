@@ -9,3 +9,20 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
   }
+
+.loading-div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.add-to-team {
+  background-color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

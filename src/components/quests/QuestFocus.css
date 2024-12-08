@@ -9,6 +9,7 @@
     left: 5vh;
     font-size: 4vh;
     font-weight: normal;
+    margin-bottom: 0.5rem;
   }
   
 .quest-focus hr {
@@ -35,27 +36,19 @@
   }
 
 .quest-focus button {
-    width: 10vh;
+    height: 2.5rem;
+    width: 5rem;
   }
 
 .difficulty-text-Easy {
-    position: absolute;
-    right: 4vh;
-    top: 5vh;
     color: #7FB672;
   }
   
 .difficulty-text-Medium {
-    position: absolute;
-    right: 4vh;
-    top: 5vh;
     color: #EACC61;
   }
   
 .difficulty-text-Hard {
-    position: absolute;
-    right: 4vh;
-    top: 5vh;
     color: #D46C6C;
   }
 

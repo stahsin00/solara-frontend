@@ -10,6 +10,7 @@ function ShopMain() {
 
   useEffect( () => {
     fetchCharacterList();
+    setSelectedTab('Characters');
   }, []);
 
   async function fetchCharacterList() {
@@ -26,8 +27,12 @@ function ShopMain() {
   }
 
   return (
-    <div className="shop-main">
-        <CharacterList shop={true} isLoading={loading} characters={characters}/>
+    <div className="main-container">
+        {
+          (selectedTab != 'Equipment') ?
+          (<CharacterList shop={true} isLoading={loading} characters={characters}/>) :
+          (<div className='coming-soon'>Coming soon.</div>)
+        }
     </div>
   );
 }

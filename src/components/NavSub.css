@@ -1,7 +1,8 @@
 .os-title {
     font-family: var(--heading-font);
     text-align: center;
-    font-size: 6vh;
+    font-size: 4vh;
+    font-weight: normal;
     padding: 0;
   }
   
@@ -32,4 +33,5 @@
     grid-template-columns: repeat(1, 1fr);
     width: 100%;
     bottom: 20px;
+    font-size: medium;
   }

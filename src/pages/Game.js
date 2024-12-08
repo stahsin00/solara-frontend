@@ -12,7 +12,7 @@ function Game() {
         <div className='current-location'>Current Location: Solara Outskirts</div>
         {(!isBattling) ? 
         (
-          <SetTimer handleStart={() => setIsBattling(true)} setGame={setGame}/>
+          <SetTimer handleStart={() => setIsBattling(true)} setGame={setGame} game={game}/>
         ) 
         : 
         (
